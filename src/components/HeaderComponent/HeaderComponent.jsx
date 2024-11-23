@@ -1,4 +1,4 @@
-import { Badge, Col, Popover } from 'antd'
+import { Badge, Col, message, Popover } from 'antd'
 import React, { useRef, useEffect, useState } from 'react'
 import { SearchSuggestionImage, SearchSuggestionItem, SearchSuggestionName, SearchSuggestionPrice, SearchSuggestions, WrapperContentPopup, WrapperHeader, WrapperHeaderAccout, WrapperTextHeader, WrapperTextHeaderSmall } from './style'
 import {
@@ -34,12 +34,26 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
         navigate('/sign-in')
     }
 
+    // const handleLogout = async () => {
+    //     setPending(true)
+    //     await UserService.logoutUser()
+    //     dispatch(resetUser())
+    //     setPending(false)
+    // }
     const handleLogout = async () => {
-        setPending(true)
-        await UserService.logoutUser()
-        dispatch(resetUser())
-        setPending(false)
-    }
+        try {
+            setPending(true);
+            await UserService.logoutUser();
+            dispatch(resetUser());
+            message.success('Đăng xuất thành công!');
+        } catch (error) {
+            console.error('Đăng xuất thất bại:', error);
+            message.error('Đăng xuất thất bại. Vui lòng thử lại.');
+        } finally {
+            setPending(false);
+        }
+    };
+
 
     useEffect(() => {
         setPending(true)

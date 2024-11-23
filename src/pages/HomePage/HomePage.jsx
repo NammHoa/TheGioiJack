@@ -24,7 +24,7 @@ const HomePage = () => {
     const searchProduct = useSelector((state) => state?.product?.search)
     const searchDebounce = useDebounce(searchProduct, 500)
     const [pending, setPending] = useState(false)
-    const [limit, setLimit] = useState(20)
+    const [limit, setLimit] = useState(10)
     const [typeProducts, setTypeProducts] = useState([])
     const [showAdBanner, setShowAdBanner] = useState(true);
 
@@ -52,28 +52,30 @@ const HomePage = () => {
         fetchAllTypeProduct()
     }, [])
 
+
     return (
         <Loading isPending={isPending || pending}>
             {showAdBanner && (
                 <AdBanner>
-                    <button style={{ color: 'white' }} className="close-button" onClick={() => setShowAdBanner(false)}>×</button>
+                    <button style={{ color: 'white', width: '24px', height: '24px' }} className="close-button" onClick={() => setShowAdBanner(false)}>×</button>
                     <img
                         src={banner}
                         onClick={() => navigate('/SaleAll')}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: 'pointer', width: '380px', height: '380px' }}
                         alt="Ad Banner"
+
                     />
                 </AdBanner>
             )}
             <div style={{ width: '1270px', margin: '0 auto' }}>
                 <div style={{ position: 'fixed', top: 170, left: 0 }}>
                     <div className="fixed-banner left-banner" onClick={() => navigate('/PcSale')}>
-                        <img src="https://nguyencongpc.vn/media/banner/02_Aprecc12b38c340290d973f8a2217c26d35.webp" alt="Left Image" style={{ maxWidth: '300px', maxHeight: '300px', cursor: 'pointer' }} />
+                        <img src="https://nguyencongpc.vn/media/banner/02_Aprecc12b38c340290d973f8a2217c26d35.webp" alt="Left Image" style={{ maxWidth: '300px', maxHeight: '350px', cursor: 'pointer' }} />
                     </div>
                 </div>
                 <div style={{ position: 'fixed', top: 170, right: 0 }}>
                     <div className="fixed-banner right-banner" onClick={() => navigate('/LaptopSale')}>
-                        <img src="https://nguyencongpc.vn/media/banner/04_May7b248abf20c1eaf49cd89857bccd44ed.webp" alt="Right Image" style={{ maxWidth: '300px', maxHeight: '300px', cursor: 'pointer' }} />
+                        <img src="https://nguyencongpc.vn/media/banner/04_May7b248abf20c1eaf49cd89857bccd44ed.webp" alt="Right Image" style={{ maxWidth: '300px', maxHeight: '350px', cursor: 'pointer' }} />
                     </div>
                 </div>
                 <WrapperTypeProduct>

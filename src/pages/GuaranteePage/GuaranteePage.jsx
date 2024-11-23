@@ -10,9 +10,9 @@ const GuaranteePage = () => {
     return (
         <WrapperContainer>
             <Col span={24}>
-                <p style={{ width: '100%', marginTop: '5px' }}>
+                {/* <p style={{ width: '100%', marginTop: '5px' }}>
                     <img style={{ width: '100%', height: '400px', marginLeft: '5px' }} src={baohanh} alt="baohanh" />
-                </p>
+                </p> */}
             </Col>
             <Row gutter={13}>
                 {/* Mục lục bên trái */}
@@ -97,7 +97,7 @@ const GuaranteePage = () => {
                             <WrapperTextIcons>
                                 . Các điều kiện bảo hành cụ thể có thể thay đổi tùy theo từng nhà sản xuất và nhà cung cấp sản phẩm.
                             </WrapperTextIcons>
-                            <WrapperTextIcons style={{ color: '#E30019' }}>
+                            <WrapperTextIcons style={{ color: '#4197ee' }}>
                                 . Dữ liệu (lưu trữ trong sản phẩm: Laptop/ Máy tính để bàn/ Điện thoại/ Ổ cứng…) không thuộc phạm vi bảo hành. Chúng tôi hoàn toàn ý thức được tầm quan trọng của dữ liệu của quý khách hàng và luôn cố gắng hết sức để hỗ trợ - hướng dẫn quý khách hàng trong việc sao lưu dữ liệu. TheGioiJack không chịu trách nhiệm về bất cứ thiệt hại trực tiếp hoặc gián tiếp nào gây ra cho quý khách hàng nếu dữ liệu lưu trong sản phẩm bị tiết lộ, bị mất, bị hư hỏng trong quá trình kiểm tra, xử lý bảo hành.
                             </WrapperTextIcons>
                             <WrapperTextIcons>

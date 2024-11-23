@@ -47,10 +47,11 @@ const OrderSucess = () => {
                     </WrapperItemOrder>
                   )
                 })}
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+                  <span style={{ fontSize: '16px', color: 'red',  }}>Tổng tiền: {convertPrice(state?.totalPriceMemo)}</span>
+                </div>
               </WrapperItemOrderInfo>
-              <div>
-                <span style={{ fontSize: '16px', color: 'red' }}>Tổng tiền: {convertPrice(state?.totalPriceMemo)}</span>
-              </div>
+
             </WrapperContainer>
           </div>
         </div>

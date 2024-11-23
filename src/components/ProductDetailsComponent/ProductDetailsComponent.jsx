@@ -102,7 +102,9 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         price: productDetails?.price,
                         product: productDetails?._id,
                         discount: productDetails?.discount,
-                        countInStock: productDetails?.countInStock
+                        countInStock: productDetails?.countInStock,
+                        selled: productDetails?.selled
+
                     }
                 }))
             } else {
@@ -122,7 +124,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
                     <div>
                         <Rate allowHalf defaultValue={productDetails?.rating} value={productDetails?.rating} />
-                        <WrapperStyleTextSell> | Da ban 1000+</WrapperStyleTextSell>
+                        <WrapperStyleTextSell> | Đã bán {productDetails?.selled || 0}</WrapperStyleTextSell>
                     </div>
                     <WrapperPriceProduct>
                         <WrapperPriceTextProduct>{convertPrice(productDetails?.price)} | <WrapperPriceTextDiscount> - {productDetails?.discount} %</WrapperPriceTextDiscount> </WrapperPriceTextProduct>

@@ -27,6 +27,8 @@ const ProfilePage = () => {
             UserService.updateUser(id, rests, access_token)
         }
     )
+    const [emailError, setEmailError] = useState('');
+    const [phoneError, setPhoneError] = useState('');
 
     const dispatch = useDispatch()
     const { isPending, isSuccess, isError } = mutation
@@ -74,10 +76,25 @@ const ProfilePage = () => {
         setAvatar(file.preview)
     }
 
-    const handleUpdate = () => {
-        mutation.mutate({ id: user?.id, email, name, phone, address, avatar, access_token: user?.access_token })
+    // const handleUpdate = () => {
+    //     mutation.mutate({ id: user?.id, email, name, phone, address, avatar, access_token: user?.access_token })
 
-    }
+    // }
+    const handleUpdate = () => {
+        if (!email.endsWith('@gmail.com')) {
+            message.error('Email phải có đuôi @gmail.com');
+            return;
+        }
+
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phone)) {
+            message.error('Số điện thoại phải có đúng 10 chữ số.');
+            return;
+        }
+
+        mutation.mutate({ id: user?.id, email, name, phone, address, avatar, access_token: user?.access_token });
+    };
+
     return (
         <div style={{ width: '1270px', margin: '0 auto', height: '500px' }}>
             <WrapperHeader>Thông tin người dùng</WrapperHeader>

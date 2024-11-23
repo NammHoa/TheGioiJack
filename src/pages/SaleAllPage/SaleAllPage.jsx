@@ -23,7 +23,7 @@ const SallAllPage = () => {
 
     const fetchAllProducts = async (page, limit) => {
         setPending(true);
-        const res = await ProductService.getAllProduct(page, limit); // Sử dụng hàm getAllProducts hoặc thay đổi logic để lấy tất cả sản phẩm
+        const res = await ProductService.getAllProduct(page, limit);
         if (res?.status === 'OK') {
             setPending(false);
             setProducts(res?.data);
@@ -57,19 +57,19 @@ const SallAllPage = () => {
 
         // Lọc theo searchDebounce
         if (searchDebounce === '') {
-            return true; // Hiển thị nếu không có filter search
+            return true;
         } else if (product.name.toLowerCase().includes(searchDebounce.toLowerCase())) {
             return true; // Hiển thị nếu tên sản phẩm chứa searchDebounce
         }
 
-        return false; // Không hiển thị nếu không thoả mãn bất kỳ điều kiện nào
+        return false;
     });
 
 
     return (
         <Loading isPending={pending}>
             <div style={{ width: '100%', background: '#efefef', height: 'auto' }}>
-                <Image src={picture} alt="Laptop Sale" />
+                <Image style={{ marginTop: '1px' }} src={picture} alt="Laptop Sale" />
                 <div style={{ width: '1270px', margin: '0 auto', height: '100%' }}>
                     <Row style={{ paddingTop: '10px', height: 'calc(100% - 20px)' }}>
                         <Col span={24} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>

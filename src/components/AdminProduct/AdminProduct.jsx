@@ -261,7 +261,8 @@ const AdminProduct = () => {
             title: 'Tên',
             dataIndex: 'name',
             sorter: (a, b) => a.name.length - b.name.length,
-            ...getColumnSearchProps('name')
+            ...getColumnSearchProps('name'),
+            width: 750
         },
         {
             title: 'Giá',
@@ -269,19 +270,19 @@ const AdminProduct = () => {
             sorter: (a, b) => a.price - b.price,
             filters: [
                 {
-                    text: '>= 50',
+                    text: '>= 25000000',
                     value: '>=',
                 },
                 {
-                    text: '<= 50',
+                    text: '<= 25000000',
                     value: '<=',
                 }
             ],
             onFilter: (value, record) => {
                 if (value === '>=') {
-                    return record.price >= 50
+                    return record.price >= 25000000
                 }
-                return record.price <= 50
+                return record.price <= 25000000
             },
         },
         {
@@ -452,14 +453,26 @@ const AdminProduct = () => {
             image: file.preview
         })
     }
-    const onUpdateProduct = () => {
-        mutationUpdate.mutate({ id: rowSelected, token: user?.access_token, ...stateProductDetails }, {
-            onSettled: () => {
-                queryProduct.refetch()
-            }
-        })
-    }
+    // const onUpdateProduct = () => {
+    //     mutationUpdate.mutate({ id: rowSelected, token: user?.access_token, ...stateProductDetails }, {
+    //         onSettled: () => {
+    //             queryProduct.refetch()
+    //         }
+    //     })
+    // }
 
+    const onUpdateProduct = () => {
+        const updatedData = { ...stateProductDetails };
+        if (updatedData.type === 'add_type') {
+            updatedData.type = updatedData.newType; // Set type to newType if 'add_type'
+            delete updatedData.newType; // Remove newType from the object
+        }
+        mutationUpdate.mutate({ id: rowSelected, token: user.access_token, ...updatedData }, {
+            onSettled: () => {
+                queryProduct.refetch();
+            }
+        });
+    };
     const handleChangeSelect = (value) => {
         setStateProduct({
             ...stateProduct,
@@ -610,13 +623,42 @@ const AdminProduct = () => {
                         >
                             <InputComponent value={stateProductDetails.manufacturer} onChange={handleOnchangeDetails} name="manufacturer" />
                         </Form.Item>
-                        <Form.Item
+                        {/* <Form.Item
                             label="Loại"
                             name="type"
                             rules={[{ required: true, message: 'Vui lòng nhập Loại !' }]}
                         >
                             <InputComponent value={stateProductDetails['type']} onChange={handleOnchangeDetails} name="type" />
+                        </Form.Item> */}
+                        <Form.Item
+                            label="Loại"
+                            name="type"
+                            rules={[{ required: true, message: 'Vui lòng nhập loại !' }]}
+                        >
+                            <Select
+                                name="type"
+                                // defaultValue="lucy"
+                                // style={{ width: 120 }}
+                                value={stateProductDetails.type}
+                                // onChange={handleChangeSelect}
+                                onChange={(value) => {
+                                    setStateProductDetails({
+                                        ...stateProductDetails,
+                                        type: value
+                                    })
+                                }}
+                                options={renderOptions(typeProduct?.data?.data)}
+                            />
                         </Form.Item>
+                        {stateProduct.type === 'add_type' && (
+                            <Form.Item
+                                label='Loại mới'
+                                name="newType"
+                                rules={[{ required: true, message: 'Vui lòng nhập loại !' }]}
+                            >
+                                <InputComponent value={stateProductDetails.newType} onChange={handleOnchangeDetails} name="newType" />
+                            </Form.Item>
+                        )}
                         <Form.Item
                             label="Tồn kho"
                             name="countInStock"

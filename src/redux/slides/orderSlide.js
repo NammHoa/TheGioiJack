@@ -87,6 +87,7 @@ export const orderSlide = createSlice({
     },
 })
 
+
 // Action creators are generated for each case reducer function
 export const { addOrderProduct, increaseAmount, decreaseAmount, removeOrderProduct, removeAllOrderProduct, selectedOrder, resetOrder } = orderSlide.actions
 

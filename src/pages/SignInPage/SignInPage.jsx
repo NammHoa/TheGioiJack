@@ -3,7 +3,7 @@ import { WrapperContainerRight, WrapperContainerleft, WrapperTextLight } from ".
 import InputForm from '../../components/InputForm/InputForm'
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import imageLogo from '../../assets/images/logoLoginn.png'
-import { Image } from "antd";
+import { Image, message } from "antd";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import * as UserService from '../../services/UserService'
@@ -21,30 +21,52 @@ const SignInPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-
+    const [errorMessage, setErrorMessage] = useState('');
     const mutation = useMutationHooks(
         data => UserService.loginUser(data)
     )
 
     const { data, isPending, isSuccess } = mutation
 
+    // useEffect(() => {
+    //     if (isSuccess) {
+    //         if (location?.state) {
+    //             navigate(location?.state)
+    //         } else {
+    //             navigate('/')
+    //         }
+    //         localStorage.setItem('access_token', JSON.stringify(data?.access_token))
+    //         localStorage.setItem('refresh_token', JSON.stringify(data?.refresh_token))
+    //         if (data?.access_token) {
+    //             const decoded = jwtDecode(data?.access_token)
+    //             if (decoded?.id) {
+    //                 handleGetDetailsUser(decoded?.id, data?.access_token)
+    //             }
+    //         }
+    //     }
+    // }, [isSuccess])
     useEffect(() => {
         if (isSuccess) {
+            message.success('Đăng nhập thành công!');
             if (location?.state) {
-                navigate(location?.state)
+                navigate(location?.state);
             } else {
-                navigate('/')
+                navigate('/');
             }
-            localStorage.setItem('access_token', JSON.stringify(data?.access_token))
-            localStorage.setItem('refresh_token', JSON.stringify(data?.refresh_token))
+            localStorage.setItem('access_token', JSON.stringify(data?.access_token));
+            localStorage.setItem('refresh_token', JSON.stringify(data?.refresh_token));
             if (data?.access_token) {
-                const decoded = jwtDecode(data?.access_token)
+                const decoded = jwtDecode(data?.access_token);
                 if (decoded?.id) {
-                    handleGetDetailsUser(decoded?.id, data?.access_token)
+                    handleGetDetailsUser(decoded?.id, data?.access_token);
                 }
             }
+
         }
-    }, [isSuccess])
+    }, [isSuccess]);
+
+
+
 
     const handleGetDetailsUser = async (id, token) => {
         const storage = localStorage.getItem('refresh_token')
@@ -66,10 +88,11 @@ const SignInPage = () => {
         navigate('/forgot-password')
     }
     const handleSignIn = () => {
+
         mutation.mutate({
             email,
             password
-        })
+        });
     }
     return (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.53)', height: '100vh' }}>
@@ -120,7 +143,7 @@ const SignInPage = () => {
                         <WrapperTextLight onClick={handleNavigateSignUp}> Tạo tài khoản</WrapperTextLight></p>
                 </WrapperContainerleft>
                 <WrapperContainerRight>
-                    <Image src={imageLogo} preview={false} alt="image-logo" height="125px" width="125px"  />
+                    <Image src={imageLogo} preview={false} alt="image-logo" height="125px" width="125px" />
                     <h4 >Nhận nhiều ưu đãi khi đăng nhập </h4>
                     <h4>và mua hàng tại THEGIOIJACK</h4>
                 </WrapperContainerRight>

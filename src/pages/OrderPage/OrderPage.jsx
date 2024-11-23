@@ -72,6 +72,7 @@ const OrderPage = () => {
         }
     }
 
+
     useEffect(() => {
         dispatch(selectedOrder({ listChecked }))
     }, [listChecked])
@@ -293,7 +294,7 @@ const OrderPage = () => {
                             onClick={() => handleAddCard()}
                             size={40}
                             styleButton={{
-                                background: '#E30019',
+                                background: '#2d83d8',
                                 height: '48px',
                                 width: '320px',
                                 border: 'none',

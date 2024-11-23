@@ -9,9 +9,9 @@ import giaohang from '../../assets/images/giaohang.png';
 const TransportPage = () => {
     return (
         <WrapperContainer>
-            <p style={{ width: '100%', marginTop: '5px' }}>
-                <img style={{ width: '100%', height: '400px', marginLeft: '8px' }} src={vanchuyen} alt="vanchuyen" />
-            </p>
+            {/* <p style={{ width: '100%', marginTop: '5px' }}>
+                <img style={{ width: '500px', height: '300px', marginLeft: '8px' }} src={vanchuyen} alt="vanchuyen" />
+            </p> */}
             <WrapperTextIcons>
                 <b style={{ fontSize: '16px', fontWeight: 'bolder' }}>- TheGioiJack cung cấp dịch vụ giao hàng toàn quốc, gửi hàng tận nơi đến địa chỉ cung cấp của Quý khách. Thời gian giao hàng dự kiến phụ thuộc vào kho và địa chỉ nhận hàng của Quý khách.</b>
             </WrapperTextIcons>
@@ -22,7 +22,7 @@ const TransportPage = () => {
                 <b style={{ fontSize: '16px', fontWeight: 'bolder' }}>- Phí dịch vụ giao hàng</b>
             </WrapperTextIcons>
             <WrapperTextIcons>
-                <img style={{ width: '50%', height: '300px' }} src={giaohang} alt="giaohang" />
+                <img style={{ width: '40%', height: '300px' }} src={giaohang} alt="giaohang" />
             </WrapperTextIcons>
             <WrapperTextIcons>
                 Chính sách này có hiệu lực từ ngày 11 tháng 10 năm 2024.
@@ -31,7 +31,7 @@ const TransportPage = () => {
                 Thời gian dự kiến giao hàng: phụ thuộc vào kho và địa chỉ nhận hàng của Quý khách. Thời gian dự kiến giao hàng tiêu chuẩn như sau:
             </WrapperTextIcons>
             <WrapperTextIcons>
-                <img style={{ width: '50%', height: '300px' }} src={timegiaohang} alt="timegiaohang" />
+                <img style={{ width: '40%', height: '300px' }} src={timegiaohang} alt="timegiaohang" />
             </WrapperTextIcons>
             <WrapperTextIcons>
                 . Nội thành Tp.HCM: Quận 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, Bình Tân, Gò Vấp, Thủ Đức, Bình Thạnh, Phú Nhuận, Tân Phú, Tân Bình.

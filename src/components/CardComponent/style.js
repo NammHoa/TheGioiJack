@@ -17,6 +17,12 @@ export const StyleNameProduct = styled.div`
     font-size: 14px;
     line-height: 16px;
     color: #333333;
+    height: 48px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical; 
 `
 
 export const WrapperReportText = styled.div`
@@ -25,6 +31,8 @@ export const WrapperReportText = styled.div`
     display: flex;
     align-items: center;
     margin-top: 10px;
+    height: 24px; 
+
 `
 
 export const WrapperPriceText = styled.div`
@@ -32,6 +40,8 @@ export const WrapperPriceText = styled.div`
     font-size: 16px;
     font-weight: 500;
     margin-top: 10px;
+    height: 32px; 
+
 `
 
 export const WrapperDiscountText = styled.span`
