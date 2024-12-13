@@ -5,47 +5,54 @@ export const FooterWrapper = styled.footer`
     color: #000;
     font-size: 14px;
     padding: 20px 0;
-
+    box-sizing: border-box;
     .container {
         max-width: 1200px;
         margin: 0 auto;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
-        align-items: center;
+        gap: 20px; 
+        align-items: flex-start;
     }
-
     .contact-info, .useful-links, .social-links {
-        flex: 1;
+        flex: 1 1 200px; 
+        margin: 0 10px;
     }
-
     ul {
         list-style: none;
         padding: 0;
+        margin: 0;
     }
-
     li {
-        margin-bottom: 5px;
+        margin-bottom: 10px; 
     }
-
     a {
         color: #000;
         text-decoration: none;
+        transition: color 0.3s ease-in-out; 
     }
+    
     a:hover {
-        color: #E30019; /* Màu chữ khi hover */
+        color: #E30019; 
         text-decoration: underline;
     }
 
     .copyright {
         text-align: center;
         margin-top: 20px;
+        font-size: 13px; 
+        color: #777;
     }
+
     .section-title {
         font-weight: 700;
-        margin-bottom: 10px; /* Đảm bảo có một khoảng cách nhỏ giữa tiêu đề và nội dung phía dưới */
-        margin-top: 0; /* Loại bỏ khoảng trắng phía trên tiêu đề */
+        font-size: 16px;
+        margin-bottom: 15px;
+        margin-top: 0;
     }
 `;
+
 export const Wrapperli = styled.li`
-margin-top: 10px
-`
+    margin-top: 10px;
+`;

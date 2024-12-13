@@ -24,7 +24,7 @@ const TypeProductPage = () => {
     const [pending, setPending] = useState(false)
     const [panigate, setPanigate] = useState({
         page: 0,
-        limit: 10,
+        limit: 4,
         total: 1,
     })
 
@@ -39,6 +39,8 @@ const TypeProductPage = () => {
             setPending(false)
         }
     }
+
+
 
     useEffect(() => {
         if (state) {
@@ -135,7 +137,17 @@ const TypeProductPage = () => {
                                     )
                                 })}
                             </WrapperProducts>
-                            <Pagination defaultCurrent={panigate.page + 1} total={panigate?.total} onChange={onChange} style={{ textAlign: 'center', marginTop: '10px' }} />
+                            <Pagination
+                                current={panigate.page + 1}
+                                total={panigate?.total * panigate.limit}
+                                pageSize={panigate.limit}
+                                onChange={onChange}
+                                style={{ textAlign: 'center', marginTop: '10px' }}
+                            />
+
+
+
+                            {/* <Pagination defaultCurrent={panigate.page + 1} total={panigate?.total} onChange={onChange} style={{ textAlign: 'center', marginTop: '10px' }} /> */}
                         </Col>
                     </Row>
                 </div>

@@ -3,7 +3,7 @@ import { useDebounce } from '../../hooks/useDebounce'
 import { useQuery } from '@tanstack/react-query'
 import * as ProductService from '../../services/ProductService'
 import { useNavigate } from 'react-router-dom'
-import './SearchComponent.css' // Create this CSS file for styling
+import './SearchComponent.css' 
 
 const SearchComponent = () => {
     const [search, setSearch] = useState('')

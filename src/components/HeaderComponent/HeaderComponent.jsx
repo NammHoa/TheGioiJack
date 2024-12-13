@@ -55,6 +55,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     };
 
 
+
     useEffect(() => {
         setPending(true)
         setUserName(user?.name)

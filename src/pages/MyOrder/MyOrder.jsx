@@ -16,6 +16,7 @@ import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutationHooks } from '../../hooks/useMutationHook';
 import * as message from '../../components/Message/Message';
+import { Modal } from 'antd';
 
 const MyOrderPage = () => {
   const location = useLocation();
@@ -52,16 +53,38 @@ const MyOrderPage = () => {
     }
   );
 
+  // const handleCancelOrder = (order) => {
+  //   mutation.mutate(
+  //     { id: order._id, token: state?.token, orderItems: order?.orderItems, userId: user.id },
+  //     {
+  //       onSuccess: () => {
+  //         queryOrder.refetch();
+  //       },
+  //     }
+  //   );
+  // };
+
+
   const handleCancelOrder = (order) => {
-    mutation.mutate(
-      { id: order._id, token: state?.token, orderItems: order?.orderItems, userId: user.id },
-      {
-        onSuccess: () => {
-          queryOrder.refetch();
-        },
-      }
-    );
+    Modal.confirm({
+      title: 'Xác nhận hủy đơn hàng',
+      content: 'Bạn có chắc chắn muốn hủy đơn hàng này không?',
+      okText: 'Xác nhận',
+      cancelText: 'Hủy bỏ',
+      maskClosable: true,
+      onOk: () => {
+        mutation.mutate(
+          { id: order._id, token: state?.token, orderItems: order?.orderItems, userId: user.id },
+          {
+            onSuccess: () => {
+              queryOrder.refetch();
+            },
+          }
+        );
+      },
+    });
   };
+
 
   const { isPending: isPendingCancel, isSuccess: isSuccessCancel, isError: isErrorCancel, data: dataCancel } = mutation;
 

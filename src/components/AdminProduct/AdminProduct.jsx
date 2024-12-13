@@ -464,8 +464,8 @@ const AdminProduct = () => {
     const onUpdateProduct = () => {
         const updatedData = { ...stateProductDetails };
         if (updatedData.type === 'add_type') {
-            updatedData.type = updatedData.newType; // Set type to newType if 'add_type'
-            delete updatedData.newType; // Remove newType from the object
+            updatedData.type = updatedData.newType;
+            delete updatedData.newType;
         }
         mutationUpdate.mutate({ id: rowSelected, token: user.access_token, ...updatedData }, {
             onSettled: () => {
@@ -650,7 +650,7 @@ const AdminProduct = () => {
                                 options={renderOptions(typeProduct?.data?.data)}
                             />
                         </Form.Item>
-                        {stateProduct.type === 'add_type' && (
+                        {stateProductDetails.type === 'add_type' && (
                             <Form.Item
                                 label='Loại mới'
                                 name="newType"
@@ -674,16 +674,16 @@ const AdminProduct = () => {
                             <InputComponent value={stateProductDetails.price} onChange={handleOnchangeDetails} name="price" />
                         </Form.Item>
                         <Form.Item
-                            label="Rating"
+                            label="Đánh giá"
                             name="rating"
-                            rules={[{ required: true, message: 'Please input your count rating!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập đánh giá!' }]}
                         >
                             <InputComponent value={stateProductDetails.rating} onChange={handleOnchangeDetails} name="rating" />
                         </Form.Item>
                         <Form.Item
-                            label="Discount"
+                            label="Giảm giá"
                             name="discount"
-                            rules={[{ required: true, message: 'Please input your discount of product!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập giảm giá!' }]}
                         >
                             <InputComponent value={stateProductDetails.discount} onChange={handleOnchangeDetails} name="discount" />
                         </Form.Item>

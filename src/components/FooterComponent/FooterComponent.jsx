@@ -5,7 +5,7 @@ import { FacebookOutlined, InstagramOutlined, TikTokOutlined, TwitterOutlined } 
 const FooterComponent = () => {
     return (
         <FooterWrapper>
-            <div className="container">
+            <div className="container" >
                 <div className="section">
                     <h3 className="section-title">GIỚI THIỆU THEGIOIJACK</h3>
                     <p>Địa chỉ: 123 Đường ABC, Quận XYZ, Thành phố HCM</p>
@@ -34,7 +34,6 @@ const FooterComponent = () => {
                     <h3 className="section-title">Kết nối với chúng tôi</h3>
                     <ul>
                         <Wrapperli><a href="https://www.facebook.com/namzxjee/"> <FacebookOutlined style={{ color: '#4267B2' }} /> Facebook</a></Wrapperli>
-                        {/* <Wrapperli><a href="#"> <TwitterOutlined style={{ color: '#1DA1F2' }} /> Twitter</a></Wrapperli> */}
                         <Wrapperli><a href="#"><InstagramOutlined style={{ color: '#C13584' }} /> Instagram</a></Wrapperli>
                         <Wrapperli><a href="#"><TikTokOutlined style={{ color: '#000000' }} /> Tiktok</a></Wrapperli>
                     </ul>

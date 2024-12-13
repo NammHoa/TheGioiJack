@@ -42,6 +42,13 @@ export const WrapperContentInfo = styled.div`
   border-radius: 6px;
   padding: 10px;
 `
+export const WrapperContentInfoProduct = styled.div`
+  height: 350px;
+  width: 1270px;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 10px;
+`
 
 export const WrapperStyleContent = styled.div`
   display:flex;

@@ -25,14 +25,13 @@ export const WrapperTextHeader = styled(Link)`
 export const WrapperHeaderAccout = styled.div`
     display: flex;
     align-items: center;
-
+    font-size: 14px;
     gap: 10px;
     max-width: 200px;
 `
 
 export const WrapperTextHeaderSmall = styled.span`
     font-size: 12px;
-
     white-space: nowrap;
 `
 
@@ -85,4 +84,5 @@ export const SearchSuggestionPrice = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    
 `;

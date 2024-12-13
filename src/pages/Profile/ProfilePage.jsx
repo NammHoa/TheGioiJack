@@ -86,12 +86,6 @@ const ProfilePage = () => {
             return;
         }
 
-        const phoneRegex = /^[0-9]{10}$/;
-        if (!phoneRegex.test(phone)) {
-            message.error('Số điện thoại phải có đúng 10 chữ số.');
-            return;
-        }
-
         mutation.mutate({ id: user?.id, email, name, phone, address, avatar, access_token: user?.access_token });
     };
 

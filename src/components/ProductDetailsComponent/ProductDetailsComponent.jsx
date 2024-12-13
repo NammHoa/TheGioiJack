@@ -157,14 +157,14 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             <ButtonComponent
                                 size={40}
                                 styleButton={{
-                                    background: '#E30019',
+                                    background: '#2d83d8',
                                     height: '50px',
                                     width: '400px',
                                     border: 'none',
                                     borderRadius: '4px'
                                 }}
                                 onClick={handleAddOrderProduct}
-                                textbutton={'Mua ngay'}
+                                textbutton={'Thêm sản phẩm vào giỏ hàng'}
                                 styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                             ></ButtonComponent>
                             {errorLimitOrder && <div style={{ color: '#E30019' }}>Sản phẩm hết hàng</div>}

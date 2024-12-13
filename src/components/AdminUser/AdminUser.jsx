@@ -365,10 +365,19 @@ const AdminUser = () => {
                         <Form.Item
                             label="Email"
                             name="email"
-                            rules={[{ required: true, message: 'VUi lòng nhập email !' }]}
+                            rules={[
+                                { required: true, message: 'Vui lòng nhập email!' },
+                                {
+                                    validator: (_, value) =>
+                                        value && value.endsWith('@gmail.com')
+                                            ? Promise.resolve()
+                                            : Promise.reject(new Error('Email phải là định dạng @gmail.com!')),
+                                },
+                            ]}
                         >
                             <InputComponent value={stateUserDetails['email']} onChange={handleOnchangeDetails} name="email" />
                         </Form.Item>
+
                         <Form.Item
                             label="Số điện thoại"
                             name="phone"

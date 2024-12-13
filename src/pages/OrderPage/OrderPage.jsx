@@ -1,4 +1,4 @@
-import { Checkbox, Form } from 'antd'
+import { Checkbox, Form, Modal } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { CustomCheckbox, WrapperCountOrder, WrapperInfo, WrapperItemOrder, WrapperLeft, WrapperListOrder, WrapperRight, WrapperStyleHeader, WrapperStyleHeaderDilivery, WrapperTotal } from './style';
 import { DeleteOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons'
@@ -56,9 +56,22 @@ const OrderPage = () => {
         }
     }
 
+    // const handleDeleteOrder = (idProduct) => {
+    //     dispatch(removeOrderProduct({ idProduct }))
+    // }
     const handleDeleteOrder = (idProduct) => {
-        dispatch(removeOrderProduct({ idProduct }))
-    }
+        Modal.confirm({
+            title: 'Xác nhận xóa sản phẩm',
+            content: 'Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?',
+            okText: 'Xóa',
+            cancelText: 'Hủy',
+            maskClosable: true,
+            onOk: () => {
+                dispatch(removeOrderProduct({ idProduct }));
+                message.success('Xóa thành công');
+            },
+        });
+    };
 
     const handleOnchangeCheckAll = (e) => {
         if (e.target.checked) {

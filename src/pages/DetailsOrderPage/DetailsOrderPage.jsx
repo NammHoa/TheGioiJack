@@ -130,6 +130,7 @@ import * as OrderService from '../../services/OrderService';
 import {
   WrapperAllPrice,
   WrapperContentInfo,
+  WrapperContentInfoProduct,
   WrapperHeaderUser,
   WrapperInfoUser,
   WrapperItem,
@@ -212,61 +213,63 @@ const DetailsOrderPage = () => {
           </WrapperInfoUser>
         </WrapperHeaderUser>
 
-        <WrapperStyleContent>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div style={{ width: '50%' }}>Sản phẩm</div>
-            <WrapperItemLabel>Giá</WrapperItemLabel>
-            <WrapperItemLabel>Số lượng</WrapperItemLabel>
-            <WrapperItemLabel>Giảm giá</WrapperItemLabel>
-          </div>
-          {data?.orderItems?.map((item) => (
-            <WrapperProduct key={item.id}>
-              <WrapperNameProduct>
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  style={{
-                    width: '70px',
-                    height: '70px',
-                    objectFit: 'cover',
-                    border: '1px solid rgb(238, 238, 238)',
-                    padding: '2px',
-                  }}
-                />
-                <div
-                  style={{
-                    marginLeft: '10px',
-                    overflow: 'hidden',
-                    whiteSpace: 'nowrap',
-                    textOverflow: 'ellipsis',
-                    width: '60%',
-                  }}
-                >
-                  {item.name}
-                </div>
-              </WrapperNameProduct>
-              <WrapperItem>{convertPrice(item.price)}</WrapperItem>
-              <WrapperItem>{item.amount}</WrapperItem>
-              <WrapperItem>
-                {item.discount
-                  ? convertPrice((item.price * item.amount * item.discount) / 100)
-                  : '0 VND'}
-              </WrapperItem>
-            </WrapperProduct>
-          ))}
-          <WrapperAllPrice>
-            <WrapperItemLabel>Tạm tính</WrapperItemLabel>
-            <WrapperItem>{convertPrice(totalPrice)}</WrapperItem>
-          </WrapperAllPrice>
-          <WrapperAllPrice>
-            <WrapperItemLabel>Phí vận chuyển</WrapperItemLabel>
-            <WrapperItem>{convertPrice(data?.shippingPrice)}</WrapperItem>
-          </WrapperAllPrice>
-          <WrapperAllPrice>
-            <WrapperItemLabel>Tổng cộng</WrapperItemLabel>
-            <WrapperItem>{convertPrice(data?.totalPrice)}</WrapperItem>
-          </WrapperAllPrice>
-        </WrapperStyleContent>
+        <WrapperContentInfoProduct style={{ marginTop: '10px' }}>
+          <WrapperStyleContent>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div style={{ width: '50%' }}>Sản phẩm</div>
+              <WrapperItemLabel>Giá</WrapperItemLabel>
+              <WrapperItemLabel>Số lượng</WrapperItemLabel>
+              <WrapperItemLabel>Giảm giá</WrapperItemLabel>
+            </div>
+            {data?.orderItems?.map((item) => (
+              <WrapperProduct key={item.id}>
+                <WrapperNameProduct>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={{
+                      width: '70px',
+                      height: '70px',
+                      objectFit: 'cover',
+                      border: '1px solid rgb(238, 238, 238)',
+                      padding: '2px',
+                    }}
+                  />
+                  <div
+                    style={{
+                      marginLeft: '10px',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                      width: '60%',
+                    }}
+                  >
+                    {item.name}
+                  </div>
+                </WrapperNameProduct>
+                <WrapperItem>{convertPrice(item.price)}</WrapperItem>
+                <WrapperItem>{item.amount}</WrapperItem>
+                <WrapperItem>
+                  {item.discount
+                    ? convertPrice((item.price * item.amount * item.discount) / 100)
+                    : '0 VND'}
+                </WrapperItem>
+              </WrapperProduct>
+            ))}
+            <WrapperAllPrice>
+              <WrapperItemLabel>Tạm tính</WrapperItemLabel>
+              <WrapperItem>{convertPrice(totalPrice)}</WrapperItem>
+            </WrapperAllPrice>
+            <WrapperAllPrice>
+              <WrapperItemLabel>Phí vận chuyển</WrapperItemLabel>
+              <WrapperItem>{convertPrice(data?.shippingPrice)}</WrapperItem>
+            </WrapperAllPrice>
+            <WrapperAllPrice>
+              <WrapperItemLabel>Tổng cộng</WrapperItemLabel>
+              <WrapperItem>{convertPrice(data?.totalPrice)}</WrapperItem>
+            </WrapperAllPrice>
+          </WrapperStyleContent>
+        </WrapperContentInfoProduct>
       </div>
     </div>
   );

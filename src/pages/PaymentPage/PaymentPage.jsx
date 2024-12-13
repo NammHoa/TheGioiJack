@@ -458,14 +458,14 @@ const PaymentPage = () => {
   }, [order])
 
   // const diliveryPriceMemo = useMemo(() => {
-  //   if (priceMemo < 200000) {
-  //     return 20000; // Dưới hoặc bằng 200000 phí 20000
-  //   } else if (priceMemo >= 200000 && priceMemo < 500000) {
-  //     return 10000; // Từ 200000 đến 500000 phí 10000
+  //   if (priceMemo > 200000 && priceMemo < 500000) {
+  //     return 10000
+  //   } else if (priceMemo === 0 || priceMemo > 500000) {
+  //     return 0
   //   } else {
-  //     return 0; // Trên 500000 miễn phí
+  //     return 20000
   //   }
-  // }, [priceMemo]);
+  // }, [priceMemo])
   const diliveryPriceMemo = useMemo(() => {
     if (priceMemo > 200000) {
       return 10000
@@ -622,6 +622,7 @@ const PaymentPage = () => {
     document.body.appendChild(script)
   }
 
+
   useEffect(() => {
     if (!window.paypal) {
       addPaypalScript()
@@ -651,7 +652,7 @@ const PaymentPage = () => {
                   <Lable>Chọn phương thức thanh toán</Lable>
                   <WrapperRadio onChange={handlePayment} value={payment}>
                     <Radio value="later_money"> Thanh toán tiền mặt khi nhận hàng</Radio>
-                    <Radio value="paypal"> Thanh toán tiền bằng MOMO</Radio>
+                    <Radio value="paypal"> Thanh toán tiền bằng paypal</Radio>
                   </WrapperRadio>
                 </div>
               </WrapperInfo>
@@ -763,3 +764,4 @@ const PaymentPage = () => {
 }
 
 export default PaymentPage
+
