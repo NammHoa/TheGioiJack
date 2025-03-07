@@ -76,6 +76,8 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
         };
     }, [searchRef]);
 
+
+
     const content = (
         <div>
             <WrapperContentPopup onClick={() => handleClickNavigate('profile')}>Thông tin người dùng</WrapperContentPopup>
@@ -188,7 +190,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                             <Badge count={order?.orderItems?.length} size="small">
                                 <ShoppingCartOutlined style={{ fontSize: '30px' }} />
                             </Badge>
-                            <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>
+                            <WrapperTextHeaderSmall >Giỏ hàng</WrapperTextHeaderSmall>
                         </div>
                     )}
                 </Col>

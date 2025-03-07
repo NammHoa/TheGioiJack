@@ -13,11 +13,22 @@ export const FooterWrapper = styled.footer`
         flex-wrap: wrap;
         justify-content: space-between;
         gap: 20px; 
-        align-items: flex-start;
+        // align-items: flex-start;
+        align-items: stretch;
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: stretch;
+        }
     }
     .contact-info, .useful-links, .social-links {
         flex: 1 1 200px; 
         margin: 0 10px;
+        display: flex;
+        flex-direction: column; /* Đảm bảo nội dung bên trong căn dọc */
+        justify-content: space-between;
+        @media (max-width: 768px) {
+           margin: 0;
+        }
     }
     ul {
         list-style: none;
@@ -50,6 +61,9 @@ export const FooterWrapper = styled.footer`
         font-size: 16px;
         margin-bottom: 15px;
         margin-top: 0;
+         @media (max-width: 768px) {
+            text-align: center;
+        }
     }
 `;
 

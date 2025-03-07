@@ -6,6 +6,7 @@ import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import AdminUser from '../../components/AdminUser/AdminUser';
 import AdminProduct from '../../components/AdminProduct/AdminProduct';
 import OrderAdmin from '../../components/OrderAdmin/OrderAmin';
+import PieChart from '../../components/OrderAdmin/PieChart';
 import * as OrderService from '../../services/OrderService'
 import * as ProductService from '../../services/ProductService'
 import * as UserService from '../../services/UserService'
@@ -23,6 +24,7 @@ const AdminPage = () => {
         getItem('Người dùng', 'users', <UserOutlined />),
         getItem('Sản phẩm', 'products', <AppstoreOutlined />),
         getItem('Đơn hàng', 'orders', <ShoppingCartOutlined />),
+        getItem('Báo cáo doanh thu', '', <ShoppingCartOutlined />),
 
     ];
 
@@ -41,6 +43,7 @@ const AdminPage = () => {
         const res = await UserService.getAllUser(user?.access_token)
         return { data: res?.data, key: 'users' }
     }
+
 
     const queries = useQueries({
         queries: [
@@ -81,6 +84,10 @@ const AdminPage = () => {
             case 'orders':
                 return (
                     <OrderAdmin />
+                )
+            case 'reporting':
+                return (
+                    <PieChart />
                 )
             default:
                 return <></>

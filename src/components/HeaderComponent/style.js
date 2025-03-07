@@ -9,6 +9,7 @@ export const WrapperHeader = styled(Row)`
     flex-wrap: nowrap;
     width: 1270px;
     padding: 10px 0;
+
 `
 
 export const WrapperTextHeader = styled(Link)`
@@ -18,7 +19,6 @@ export const WrapperTextHeader = styled(Link)`
     text-align: left;
     &:hover {
         font-size: 18px;
-        
     }
 `
 
@@ -33,6 +33,7 @@ export const WrapperHeaderAccout = styled.div`
 export const WrapperTextHeaderSmall = styled.span`
     font-size: 12px;
     white-space: nowrap;
+    
 `
 
 export const WrapperContentPopup = styled.p`
@@ -79,8 +80,8 @@ export const SearchSuggestionName = styled.div`
 `;
 
 export const SearchSuggestionPrice = styled.div`
-   margin-left: auto; /* Pushes the element to the right */
-    color: red; /* Sets the text color to red */
+   margin-left: auto;
+    color: red;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

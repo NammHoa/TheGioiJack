@@ -484,7 +484,6 @@ const PaymentPage = () => {
   const handleAddOrder = () => {
     if (user?.access_token && order?.orderItemsSlected && user?.name
       && user?.address && user?.phone && user?.city && priceMemo && user?.id) {
-      // eslint-disable-next-line no-unused-expressions
       mutationAddOrder.mutate(
         {
           token: user?.access_token,
@@ -525,6 +524,8 @@ const PaymentPage = () => {
         { ...rests }, token)
       return res
     },
+
+
   )
 
   const { isPending, data } = mutationUpdate
@@ -729,21 +730,21 @@ const PaymentPage = () => {
               <Form.Item
                 label="Tên"
                 name="name"
-                rules={[{ required: true, message: 'Please input your name!' }]}
+                rules={[{ required: true, message: 'Vui lòng nhập tên!' }]}
               >
                 <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
               </Form.Item>
               <Form.Item
                 label="Thành phố"
                 name="city"
-                rules={[{ required: true, message: 'Please input your city!' }]}
+                rules={[{ required: true, message: 'Vui lòng nhập thành phố!' }]}
               >
                 <InputComponent value={stateUserDetails['city']} onChange={handleOnchangeDetails} name="city" />
               </Form.Item>
               <Form.Item
                 label="Số điện thoại"
                 name="phone"
-                rules={[{ required: true, message: 'Please input your  phone!' }]}
+                rules={[{ required: true, message: 'Vui lòng nhập số điện thoại!' }]}
               >
                 <InputComponent value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
               </Form.Item>
@@ -751,7 +752,7 @@ const PaymentPage = () => {
               <Form.Item
                 label="Địa chỉ"
                 name="address"
-                rules={[{ required: true, message: 'Please input your  address!' }]}
+                rules={[{ required: true, message: 'Vui lòng nhập địa chỉ!' }]}
               >
                 <InputComponent value={stateUserDetails.address} onChange={handleOnchangeDetails} name="address" />
               </Form.Item>
