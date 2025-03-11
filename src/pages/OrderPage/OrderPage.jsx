@@ -18,6 +18,7 @@ import * as message from '../../components/Message/Message'
 import { updateUser } from '../../redux/slides/UserSlide';
 import { useNavigate } from 'react-router-dom';
 import StepComponent from '../../components/StepConponent/StepComponent';
+import { Select } from "antd";
 
 const OrderPage = () => {
     const order = useSelector((state) => state.order)
@@ -43,6 +44,7 @@ const OrderPage = () => {
             setListChecked([...listChecked, e.target.value])
         }
     };
+
 
     const handleChangeCount = (type, idProduct, limited) => {
         if (type === 'increase') {
@@ -199,6 +201,8 @@ const OrderPage = () => {
             [e.target.name]: e.target.value
         })
     }
+
+
     const itemsDelivery = [
         {
             title: '20.000 VND',
@@ -213,6 +217,24 @@ const OrderPage = () => {
             description: 'Trên 500.000 VND',
         },
     ]
+
+    const provinces = [
+        "Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Hải Phòng", "Cần Thơ",
+        "An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu",
+        "Bắc Ninh", "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước",
+        "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông",
+        "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang",
+        "Hà Nam", "Hà Tĩnh", "Hải Dương", "Hậu Giang", "Hòa Bình",
+        "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu",
+        "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An", "Nam Định",
+        "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên",
+        "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị",
+        "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên",
+        "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang",
+        "Vĩnh Long", "Vĩnh Phúc", "Yên Bái"
+    ];
+
+
     return (
         <div style={{ background: '#f5f5fa', with: '100%', height: 'auto' }}>
             <div style={{ height: '100%', width: '1270px', margin: '0 auto' }}>
@@ -277,7 +299,7 @@ const OrderPage = () => {
                             <WrapperInfo>
                                 <div>
                                     <span>Địa chỉ: </span>
-                                    <span style={{ fontWeight: 'bold' }}>{`${user?.address} ${user?.city}`} </span>
+                                    <span style={{ fontWeight: 'bold' }}>{`${user?.address} ${user?.city} `} </span>
                                     <span onClick={handleChangeAddress} style={{ color: '#E30019', cursor: 'pointer' }}>Thay đổi</span>
                                 </div>
                             </WrapperInfo>
@@ -336,17 +358,41 @@ const OrderPage = () => {
                         >
                             <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
                         </Form.Item>
-                        <Form.Item
+                        {/* <Form.Item
                             label="Thành phố: "
                             name="city"
                             rules={[{ required: true, message: 'Vui lòng nhập thành phố !' }]}
                         >
                             <InputComponent value={stateUserDetails['city']} onChange={handleOnchangeDetails} name="city" />
+                        </Form.Item> */}
+                        <Form.Item
+                            label="Thành phố: "
+                            name="city"
+                            rules={[{ required: true, message: "Vui lòng nhập thành phố !" }]}
+                        >
+                            <Select
+                                value={stateUserDetails.city}
+                                onChange={(value) => handleOnchangeDetails({ target: { name: "city", value } })}
+                                placeholder="Chọn tỉnh/thành phố"
+                            >
+                                {provinces.map((province) => (
+                                    <Select.Option key={province} value={province}>
+                                        {province}
+                                    </Select.Option>
+                                ))}
+                            </Select>
                         </Form.Item>
+
+
+
                         <Form.Item
                             label="Số điện thoại: "
                             name="phone"
-                            rules={[{ required: true, message: 'Vui lòng nhập số điện thoại !' }]}
+                            rules={[
+                                { required: true, message: 'Vui lòng nhập số điện thoại !' },
+
+
+                            ]}
                         >
                             <InputComponent value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
                         </Form.Item>

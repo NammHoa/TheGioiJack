@@ -1,5 +1,5 @@
 import { Col, Image, Rate, Row } from 'antd'
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import { WrapperStyleNameProduct, WrapperStyleTextSell, WrapperPriceProduct, WrapperPriceTextProduct, WrapperAddressProduct, WrapperQualityProduct, WrapperInputNumber, WrapperBtnQualityProduct, WrapperTextSell, WrapperPriceTextDiscount } from './style'
 import { PlusOutlined, MinusOutlined, CheckCircleOutlined } from '@ant-design/icons'
 import ButtonComponent from '../ButtonComponent/ButtonComponent'
@@ -25,7 +25,8 @@ const ProductDetailsComponent = ({ idProduct }) => {
     const navigate = useNavigate()
     const location = useLocation()
     const dispatch = useDispatch()
-
+    const cartIconRef = useRef(document.getElementById('cart-icon'))
+    const imageRef = useRef(null)
     const onChange = (value) => {
         setNumProduct(Number(value))
     }
@@ -77,22 +78,35 @@ const ProductDetailsComponent = ({ idProduct }) => {
         queryFn: fetchGetDetailsProduct,
         enabled: !!idProduct
     });
+    // const handleAddOrderProduct = () => {
+    //     if (!user?.id) {
+    //         navigate('/sign-in', { state: location?.pathname })
+    //     } else {
+    //         const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
+    //         if ((orderRedux?.amount + numProduct) <= orderRedux?.countInStock || (!orderRedux && productDetails?.countInStock > 0)) {
+    //             dispatch(addOrderProduct({
+    //                 orderItem: {
+    //                     name: productDetails?.name,
+    //                     amount: numProduct,
+    //                     image: productDetails?.image,
+    //                     price: productDetails?.price,
+    //                     product: productDetails?._id,
+    //                     discount: productDetails?.discount,
+    //                     countInStock: productDetails?.countInStock,
+    //                     selled: productDetails?.selled
+
+    //                 }
+    //             }))
+    //         } else {
+    //             setErrorLimitOrder(true)
+    //         }
+    //     }
+    // }
     const handleAddOrderProduct = () => {
         if (!user?.id) {
-            navigate('/sign-in', { state: location?.pathname })
+            navigate('/sign-in', { state: location?.pathname });
         } else {
-            // {
-            //     name: { type: String, required: true },
-            //     amount: { type: Number, required: true },
-            //     image: { type: String, required: true },
-            //     price: { type: Number, required: true },
-            //     product: {
-            //         type: mongoose.Schema.Types.ObjectId,
-            //         ref: 'Product',
-            //         required: true,
-            //     },
-            // },
-            const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
+            const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id);
             if ((orderRedux?.amount + numProduct) <= orderRedux?.countInStock || (!orderRedux && productDetails?.countInStock > 0)) {
                 dispatch(addOrderProduct({
                     orderItem: {
@@ -104,14 +118,47 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         discount: productDetails?.discount,
                         countInStock: productDetails?.countInStock,
                         selled: productDetails?.selled
-
                     }
-                }))
+                }));
+                triggerAnimation();
             } else {
-                setErrorLimitOrder(true)
+                setErrorLimitOrder(true);
             }
         }
-    }
+    };
+
+
+    const triggerAnimation = () => {
+        if (!imageRef.current || !cartIconRef?.current) return;
+
+        const imgClone = imageRef.current.cloneNode(true);
+        document.body.appendChild(imgClone);
+
+        const imgRect = imageRef.current.getBoundingClientRect();
+        const cartRect = cartIconRef.current.getBoundingClientRect();
+
+        imgClone.style.position = 'fixed';
+        imgClone.style.left = `${imgRect.left}px`;
+        imgClone.style.top = `${imgRect.top}px`;
+        imgClone.style.width = `${imgRect.width}px`;
+        imgClone.style.height = `${imgRect.height}px`;
+        imgClone.style.zIndex = '1000';
+        imgClone.style.borderRadius = '50%';
+        imgClone.style.transition = 'all 0.8s ease-in-out';
+
+        setTimeout(() => {
+            imgClone.style.transform = `translate(${cartRect.left - imgRect.left}px, ${cartRect.top - imgRect.top}px) scale(0.1)`;
+            imgClone.style.opacity = '0';
+        }, 100);
+
+        setTimeout(() => {
+            imgClone.remove();
+        }, 900);
+    };
+
+
+
+
 
     return (
         <Loading isPending={isPending}>
@@ -152,7 +199,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             </button>
                         </WrapperQualityProduct>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    {/* <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         <div>
                             <ButtonComponent
                                 size={40}
@@ -168,8 +215,16 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                 styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                             ></ButtonComponent>
                             {errorLimitOrder && <div style={{ color: '#E30019' }}>Sản phẩm hết hàng</div>}
-                        </div>
-                    </div>
+                        </div> */}
+                    {/* </div> */}
+                    <ButtonComponent
+                        size={40}
+                        styleButton={{ background: '#2d83d8', height: '50px', width: '400px', border: 'none', borderRadius: '4px' }}
+                        onClick={handleAddOrderProduct}
+                        textbutton={'Thêm sản phẩm vào giỏ hàng'}
+                        styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                    />
+                    {errorLimitOrder && <div style={{ color: '#E30019' }}>Sản phẩm hết hàng</div>}
                     <div>
                         <WrapperTextSell>
                             ✔ Bảo hành chính hãng 24 tháng. <br /><br />

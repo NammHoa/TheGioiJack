@@ -18,7 +18,7 @@ import * as ProductService from '../../services/ProductService'
 import { useQuery } from '@tanstack/react-query';
 import { convertPrice } from '../../utils';
 
-const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
+const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false } ) => {
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
     const dispatch = useDispatch()
@@ -29,7 +29,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     const order = useSelector((state) => state.order)
     const [pending, setPending] = useState(false)
     const searchRef = useRef(null);
-
+    const cartIconRef = useRef(null);
     const handleNavigateLogin = () => {
         navigate('/sign-in')
     }
@@ -186,11 +186,17 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                         </WrapperHeaderAccout>
                     </Loading>
                     {!isHiddenCart && (
-                        <div onClick={() => navigate('/order')} style={{ cursor: 'pointer' }}>
+                        // <div onClick={() => navigate('/order')} style={{ cursor: 'pointer' }}>
+                        //     <Badge count={order?.orderItems?.length} size="small">
+                        //         <ShoppingCartOutlined style={{ fontSize: '30px' }} />
+                        //     </Badge>
+                        //     <WrapperTextHeaderSmall >Giỏ hàng</WrapperTextHeaderSmall>
+                        // </div>
+                        <div ref={cartIconRef} onClick={() => navigate('/order')} style={{ cursor: 'pointer' }}>
                             <Badge count={order?.orderItems?.length} size="small">
                                 <ShoppingCartOutlined style={{ fontSize: '30px' }} />
                             </Badge>
-                            <WrapperTextHeaderSmall >Giỏ hàng</WrapperTextHeaderSmall>
+                            <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>
                         </div>
                     )}
                 </Col>
