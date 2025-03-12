@@ -1,6 +1,6 @@
 import { Col, Image, Rate, Row } from 'antd'
 import React, { useCallback, useRef } from 'react'
-import { WrapperStyleNameProduct, WrapperStyleTextSell, WrapperPriceProduct, WrapperPriceTextProduct, WrapperAddressProduct, WrapperQualityProduct, WrapperInputNumber, WrapperBtnQualityProduct, WrapperTextSell, WrapperPriceTextDiscount } from './style'
+import { WrapperStyleNameProduct, WrapperStyleTextSell, WrapperPriceProduct, WrapperPriceTextProduct, WrapperAddressProduct, WrapperQualityProduct, WrapperInputNumber, WrapperBtnQualityProduct, WrapperTextSell, WrapperPriceTextDiscount, CartNotification } from './style'
 import { PlusOutlined, MinusOutlined, CheckCircleOutlined } from '@ant-design/icons'
 import ButtonComponent from '../ButtonComponent/ButtonComponent'
 import * as ProductService from '../../services/ProductService'
@@ -27,6 +27,8 @@ const ProductDetailsComponent = ({ idProduct }) => {
     const dispatch = useDispatch()
     const cartIconRef = useRef(document.getElementById('cart-icon'))
     const imageRef = useRef(null)
+    const [showNotification, setShowNotification] = useState(false);
+
     const onChange = (value) => {
         setNumProduct(Number(value))
     }
@@ -102,6 +104,12 @@ const ProductDetailsComponent = ({ idProduct }) => {
     //         }
     //     }
     // }
+    const handleAddToCart = () => {
+        setShowNotification(true);
+        setTimeout(() => {
+            setShowNotification(false);
+        }, 3000);
+    };
     const handleAddOrderProduct = () => {
         if (!user?.id) {
             navigate('/sign-in', { state: location?.pathname });
@@ -121,6 +129,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                     }
                 }));
                 triggerAnimation();
+                handleAddToCart();
             } else {
                 setErrorLimitOrder(true);
             }
@@ -217,14 +226,25 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             {errorLimitOrder && <div style={{ color: '#E30019' }}>Sản phẩm hết hàng</div>}
                         </div> */}
                     {/* </div> */}
-                    <ButtonComponent
-                        size={40}
-                        styleButton={{ background: '#2d83d8', height: '50px', width: '400px', border: 'none', borderRadius: '4px' }}
-                        onClick={handleAddOrderProduct}
-                        textbutton={'Thêm sản phẩm vào giỏ hàng'}
-                        styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
-                    />
+
+
+                    <div>
+                        <ButtonComponent
+                            size={40}
+                            styleButton={{ background: '#2d83d8', height: '50px', width: '400px', border: 'none', borderRadius: '4px' }}
+                            onClick={handleAddOrderProduct}
+                            textbutton={'Thêm sản phẩm vào giỏ hàng'}
+                            styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                        />
+
+                        <CartNotification className={showNotification ? "active" : ""}>
+                            ✅ Đã thêm vào giỏ hàng
+                            <br />
+                            <button style={{ borderRadius: '8px', width: '150px', alignItems: 'center', marginTop: '5px', border: '1px solid #bbddfd', color: '#2d83d8', backgroundColor: '#f1f8fe', cursor: 'pointer' }} onClick={() => window.location.href = "/order"}>Xem giỏ hàng</button>
+                        </CartNotification>
+                    </div>
                     {errorLimitOrder && <div style={{ color: '#E30019' }}>Sản phẩm hết hàng</div>}
+
                     <div>
                         <WrapperTextSell>
                             ✔ Bảo hành chính hãng 24 tháng. <br /><br />

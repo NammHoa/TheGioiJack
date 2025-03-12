@@ -91,3 +91,24 @@ color: #E30019;
 margin-top: 20px;
 display: inline-block;
 `
+export const CartNotification = styled.div`
+  position: fixed;
+  width: 200px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  right: -192px;
+  bottom:68px;
+  z-index: 99999;
+  text-align: center;
+  border: 1px solid #d0d5dd;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+  &.active {
+    opacity: 1;
+    right: 50px;
+  }
+`;

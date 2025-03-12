@@ -87,3 +87,21 @@ export const SearchSuggestionPrice = styled.div`
     white-space: nowrap;
     
 `;
+
+export const cartUn = styled.div`
+  position: fixed;
+  width: 182px;
+  padding: 0 8px 8px 8px;
+  background-color: #fff;
+  border-radius: 8px;
+  right: -192px; /* Ban đầu ẩn */
+  bottom: 96px;
+  z-index: 99999;
+  text-align: center;
+  border: 1px solid #d0d5dd;
+  transition: right 0.3s ease-in-out; /* Animation */
+
+  &.active {
+    right: 16px; /* Hiện ra */
+  }
+`;

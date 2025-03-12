@@ -23,6 +23,7 @@ import { Select } from "antd";
 const OrderPage = () => {
     const order = useSelector((state) => state.order)
     const user = useSelector((state) => state.user)
+    const [numProduct, setNumProduct] = useState(1)
 
     const [listChecked, setListChecked] = useState([])
     const [isOpenModalUpdateInfo, setIsOpenModalUpdateInfo] = useState(false)
@@ -57,6 +58,10 @@ const OrderPage = () => {
             }
         }
     }
+
+
+
+
 
     // const handleDeleteOrder = (idProduct) => {
     //     dispatch(removeOrderProduct({ idProduct }))
@@ -143,11 +148,27 @@ const OrderPage = () => {
         return Number(priceMemo) - Number(priceDiscountMemo) + Number(diliveryPriceMemo)
     }, [priceMemo, priceDiscountMemo, diliveryPriceMemo])
 
+    // const handleRemoveAllOrder = () => {
+    //     if (listChecked?.length > 1) {
+    //         dispatch(removeAllOrderProduct({ listChecked }))
+    //     }
+    // }
+
     const handleRemoveAllOrder = () => {
-        if (listChecked?.length > 1) {
-            dispatch(removeAllOrderProduct({ listChecked }))
+        if (listChecked?.length > 0) {
+            Modal.confirm({
+                title: "Xác nhận xóa",
+                content: `Bạn có chắc chắn muốn xóa ${listChecked.length} sản phẩm khỏi giỏ hàng không?`,
+                okText: "Xóa",
+                cancelText: "Hủy",
+                okType: "danger",
+                onOk() {
+                    dispatch(removeAllOrderProduct({ listChecked }));
+                    message.success("Xóa sản phẩm thành công!");
+                }
+            });
         }
-    }
+    };
 
     const handleAddCard = () => {
         if (!order?.orderItemsSlected?.length) {
