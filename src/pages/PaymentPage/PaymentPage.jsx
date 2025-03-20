@@ -17,7 +17,7 @@ import * as message from '../../components/Message/Message'
 import { updateUser } from '../../redux/slides/UserSlide';
 import { useNavigate } from 'react-router-dom';
 import { removeAllOrderProduct } from '../../redux/slides/orderSlide';
-import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import * as PaymentService from '../../services/PaymentService'
 import { Label } from 'recharts';
 import { Lable } from '../OrderSuccess/style';
@@ -332,13 +332,31 @@ const PaymentPage = () => {
               </div>
               {payment === 'paypal' && sdkReady ? (
                 <div style={{ width: '320px' }}>
-                  <PayPalButton
-                    amount={Math.round(totalPriceMemo / 30000)}
-                    onSuccess={onSuccessPaypal}
-                    onError={() => {
-                      alert('Error')
-                    }}
-                  />
+                  <PayPalScriptProvider options={{ "client-id": "YOUR_CLIENT_ID" }}>
+                    <PayPalButtons
+                      style={{ layout: "vertical" }}
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: (totalPriceMemo / 30000).toFixed(2),
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions) => {
+                        return actions.order.capture().then((details) => {
+                          onSuccessPaypal(details);
+                        });
+                      }}
+                      onError={() => {
+                        alert("Error");
+                      }}
+                    />
+                  </PayPalScriptProvider>
+
                 </div>
               ) : (
                 <ButtonComponent
