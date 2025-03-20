@@ -13,7 +13,7 @@ import * as UserService from '../../services/UserService'
 import { resetUser } from '../../redux/slides/UserSlide'
 import Loading from '../LoadingComponent/Loading';
 import { searchProduct } from '../../redux/slides/ProductSlide';
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/logojack.png'
 import * as ProductService from '../../services/ProductService'
 import { useQuery } from '@tanstack/react-query';
 import { convertPrice } from '../../utils';

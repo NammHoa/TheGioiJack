@@ -30,40 +30,40 @@ const SignInPage = () => {
 
     // useEffect(() => {
     //     if (isSuccess) {
+    //         message.success('Đăng nhập thành công!');
     //         if (location?.state) {
-    //             navigate(location?.state)
+    //             navigate(location?.state);
     //         } else {
-    //             navigate('/')
+    //             navigate('/');
     //         }
-    //         localStorage.setItem('access_token', JSON.stringify(data?.access_token))
-    //         localStorage.setItem('refresh_token', JSON.stringify(data?.refresh_token))
+    //         localStorage.setItem('access_token', JSON.stringify(data?.access_token));
+    //         localStorage.setItem('refresh_token', JSON.stringify(data?.refresh_token));
     //         if (data?.access_token) {
-    //             const decoded = jwtDecode(data?.access_token)
+    //             const decoded = jwtDecode(data?.access_token);
     //             if (decoded?.id) {
-    //                 handleGetDetailsUser(decoded?.id, data?.access_token)
+    //                 handleGetDetailsUser(decoded?.id, data?.access_token);
     //             }
     //         }
+
     //     }
-    // }, [isSuccess])
+    // }, [isSuccess]);
     useEffect(() => {
-        if (isSuccess) {
+        if (isSuccess && data?.access_token) {
             message.success('Đăng nhập thành công!');
             if (location?.state) {
                 navigate(location?.state);
             } else {
                 navigate('/');
             }
-            localStorage.setItem('access_token', JSON.stringify(data?.access_token));
-            localStorage.setItem('refresh_token', JSON.stringify(data?.refresh_token));
-            if (data?.access_token) {
-                const decoded = jwtDecode(data?.access_token);
-                if (decoded?.id) {
-                    handleGetDetailsUser(decoded?.id, data?.access_token);
-                }
-            }
+            localStorage.setItem('access_token', JSON.stringify(data.access_token));
+            localStorage.setItem('refresh_token', JSON.stringify(data.refresh_token));
 
+            const decoded = jwtDecode(data.access_token);
+            if (decoded?.id) {
+                handleGetDetailsUser(decoded.id, data.access_token);
+            }
         }
-    }, [isSuccess]);
+    }, [isSuccess, data?.access_token]);
 
 
 
