@@ -17,7 +17,9 @@ import * as message from '../../components/Message/Message'
 import { updateUser } from '../../redux/slides/UserSlide';
 import { useNavigate } from 'react-router-dom';
 import { removeAllOrderProduct } from '../../redux/slides/orderSlide';
-import { PayPalButton } from "react-paypal-button-v2";
+// import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 import * as PaymentService from '../../services/PaymentService'
 import { Label } from 'recharts';
 import { Lable } from '../OrderSuccess/style';
@@ -330,7 +332,7 @@ const PaymentPage = () => {
                   </span>
                 </WrapperTotal>
               </div>
-              {payment === 'paypal' && sdkReady ? (
+              {/* {payment === 'paypal' && sdkReady ? (
                 <div style={{ width: '320px' }}>
                   <PayPalButton
                     amount={Math.round(totalPriceMemo / 30000)}
@@ -354,6 +356,48 @@ const PaymentPage = () => {
                   textbutton={'Đặt hàng'}
                   styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                 ></ButtonComponent>
+              )} */}
+              {payment === "paypal" && sdkReady ? (
+                <PayPalScriptProvider options={{ "client-id": "YOUR_PAYPAL_CLIENT_ID" }}>
+                  <div style={{ width: "320px" }}>
+                    <PayPalButtons
+                      style={{ layout: "vertical" }}
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: (totalPriceMemo / 30000).toFixed(2), // Chuyển đổi sang giá trị hợp lệ
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions) => {
+                        return actions.order.capture().then((details) => {
+                          onSuccessPaypal(details); // Xử lý khi thanh toán thành công
+                        });
+                      }}
+                      onError={() => {
+                        alert("Error");
+                      }}
+                    />
+                  </div>
+                </PayPalScriptProvider>
+              ) : (
+                <ButtonComponent
+                  onClick={() => handleAddOrder()}
+                  size={40}
+                  styleButton={{
+                    background: "#2d83d8",
+                    height: "48px",
+                    width: "320px",
+                    border: "none",
+                    borderRadius: "4px",
+                  }}
+                  textbutton={"Đặt hàng"}
+                  styletextbutton={{ color: "#fff", fontSize: "15px", fontWeight: "700" }}
+                />
               )}
             </WrapperRight>
           </div>
