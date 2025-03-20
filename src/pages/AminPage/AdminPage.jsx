@@ -7,7 +7,7 @@ import AdminUser from '../../components/AdminUser/AdminUser';
 import AdminProduct from '../../components/AdminProduct/AdminProduct';
 import OrderAdmin from '../../components/OrderAdmin/OrderAmin';
 import PieChart from '../../components/OrderAdmin/PieChart';
-import * as OrderService from '../../services/OrderService'
+    import * as OrderService from '../../services/OrderService'
 import * as ProductService from '../../services/ProductService'
 import * as UserService from '../../services/UserService'
 
@@ -24,7 +24,7 @@ const AdminPage = () => {
         getItem('Người dùng', 'users', <UserOutlined />),
         getItem('Sản phẩm', 'products', <AppstoreOutlined />),
         getItem('Đơn hàng', 'orders', <ShoppingCartOutlined />),
-        getItem('Báo cáo doanh thu', '', <ShoppingCartOutlined />),
+        getItem('Báo cáo doanh thu', 'reporting', <ShoppingCartOutlined />),
 
     ];
 
@@ -97,7 +97,7 @@ const AdminPage = () => {
     const handleOnCLick = ({ key }) => {
         setKeySelected(key)
     }
-    console.log('memoCount', memoCount)
+
     return (
         <>
             <HeaderComponent isHiddenSearch isHiddenCart />

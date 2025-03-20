@@ -211,6 +211,8 @@ const OrderPage = () => {
                 onSuccess: () => {
                     dispatch(updateUser({ name, address, city, phone }))
                     setIsOpenModalUpdateInfo(false)
+                    message.success("Cập nhật thành công!");
+
                 }
             })
         }

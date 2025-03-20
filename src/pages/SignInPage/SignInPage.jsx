@@ -143,9 +143,12 @@ const SignInPage = () => {
                         <WrapperTextLight onClick={handleNavigateSignUp}> Tạo tài khoản</WrapperTextLight></p>
                 </WrapperContainerleft>
                 <WrapperContainerRight>
-                    <Image src={imageLogo} preview={false} alt="image-logo" height="125px" width="125px" />
+
+                    <Image onClick={() => navigate('/')} style={{ cursor: 'pointer' }} src={imageLogo} preview={false} alt="image-logo" height="125px" width="125px" />
                     <h4 >Nhận nhiều ưu đãi khi đăng nhập </h4>
                     <h4>và mua hàng tại THEGIOIJACK</h4>
+
+
                 </WrapperContainerRight>
             </div>
         </div >

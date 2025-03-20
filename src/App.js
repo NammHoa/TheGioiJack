@@ -22,6 +22,7 @@ function App() {
     }
     setIsPending(false)
   }, [])
+  
 
   const handleDecoded = () => {
     let storageData = user?.access_token || localStorage.getItem('access_token')

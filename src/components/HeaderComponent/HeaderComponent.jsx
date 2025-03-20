@@ -40,12 +40,14 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     //     dispatch(resetUser())
     //     setPending(false)
     // }
+
     const handleLogout = async () => {
         try {
             setPending(true);
             await UserService.logoutUser();
             dispatch(resetUser());
             message.success('Đăng xuất thành công!');
+            navigate('/sign-in');
         } catch (error) {
             console.error('Đăng xuất thất bại:', error);
             message.error('Đăng xuất thất bại. Vui lòng thử lại.');
@@ -186,7 +188,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                         </WrapperHeaderAccout>
                     </Loading>
                     {!isHiddenCart && (
-                        <div onClick={() => navigate('/order')} style={{ cursor: 'pointer' }}>
+                        <div onClick={() => navigate('/order')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Badge count={order?.orderItems?.length} size="small">
                                 <ShoppingCartOutlined style={{ fontSize: '30px' }} />
                             </Badge>
