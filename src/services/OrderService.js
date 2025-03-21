@@ -54,15 +54,6 @@ export const getAllOrder = async (access_token) => {
 
 
 
-export const updateOrderStatus = async (orderId, status, access_token) => {
-    const res = await axios.put(
-        `${process.env.REACT_APP_API_URL}/order/update-status/${orderId}`,
-        { status },
-        {
-            headers: { token: `Bearer ${access_token}` },
-        }
-    );
-    return res.data;
-};
+
 
 

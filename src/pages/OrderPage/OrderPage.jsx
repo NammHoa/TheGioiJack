@@ -61,11 +61,6 @@ const OrderPage = () => {
 
 
 
-
-
-    // const handleDeleteOrder = (idProduct) => {
-    //     dispatch(removeOrderProduct({ idProduct }))
-    // }
     const handleDeleteOrder = (idProduct) => {
         Modal.confirm({
             title: 'Xác nhận xóa sản phẩm',
@@ -148,11 +143,6 @@ const OrderPage = () => {
         return Number(priceMemo) - Number(priceDiscountMemo) + Number(diliveryPriceMemo)
     }, [priceMemo, priceDiscountMemo, diliveryPriceMemo])
 
-    // const handleRemoveAllOrder = () => {
-    //     if (listChecked?.length > 1) {
-    //         dispatch(removeAllOrderProduct({ listChecked }))
-    //     }
-    // }
 
     const handleRemoveAllOrder = () => {
         if (listChecked?.length > 0) {

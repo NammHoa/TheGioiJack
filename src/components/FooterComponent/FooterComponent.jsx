@@ -35,14 +35,6 @@ const FooterComponent = () => {
                     </ul>
 
                 </div>
-                {/* <div className="section">
-                    <h3 className="section-title">Kết nối với chúng tôi</h3>
-                    <ul>
-                        <Wrapperli><a href="https://www.facebook.com/namzxjee/"> <FacebookOutlined style={{ color: '#4267B2' }} /> Facebook</a></Wrapperli>
-                        <Wrapperli><a href="#"><InstagramOutlined style={{ color: '#C13584' }} /> Instagram</a></Wrapperli>
-                        <Wrapperli><a href="#"><TikTokOutlined style={{ color: '#000000' }} /> Tiktok</a></Wrapperli>
-                    </ul>
-                </div> */}
 
 
                 <div className="section">

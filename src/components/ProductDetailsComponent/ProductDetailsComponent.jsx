@@ -28,10 +28,17 @@ const ProductDetailsComponent = ({ idProduct }) => {
     const cartIconRef = useRef(document.getElementById('cart-icon'))
     const imageRef = useRef(null)
     const [showNotification, setShowNotification] = useState(false);
-
+    const [showMaxQuantityWarning, setShowMaxQuantityWarning] = useState(false);
+    // const onChange = (value) => {
+    //     setNumProduct(Number(value))
+    // }
     const onChange = (value) => {
-        setNumProduct(Number(value))
-    }
+        if (value > 5) {
+            setNumProduct(5);
+        } else {
+            setNumProduct(Number(value));
+        }
+    };
 
     const fetchGetDetailsProduct = async (context) => {
         const id = context?.queryKey && context?.queryKey[1]
@@ -63,59 +70,69 @@ const ProductDetailsComponent = ({ idProduct }) => {
         }
     }, [order.isSucessOrder])
 
-    const handleChangeCount = (type, limited) => {
+
+    // const handleChangeCount = (type) => {
+    //     if (type === 'increase') {
+    //         if (numProduct < 5 && numProduct < productDetails?.countInStock) {
+    //             setNumProduct(numProduct + 1);
+    //         }
+    //     } else {
+    //         if (numProduct > 1) {
+    //             setNumProduct(numProduct - 1);
+    //         }
+    //     }
+    // };
+
+
+    const handleChangeCount = (type) => {
         if (type === 'increase') {
-            if (!limited) {
-                setNumProduct(numProduct + 1)
+            if (numProduct < 5 && numProduct < productDetails?.countInStock) {
+                const newNum = numProduct + 1;
+                setNumProduct(newNum);
+                if (newNum === 5) {
+                    setShowMaxQuantityWarning(true);
+
+                    // Ẩn thông báo sau 5 giây
+                    setTimeout(() => {
+                        setShowMaxQuantityWarning(false);
+                    }, 5000);
+                }
             }
         } else {
-            if (!limited) {
-                setNumProduct(numProduct - 1)
+            if (numProduct > 1) {
+                const newNum = numProduct - 1;
+                setNumProduct(newNum);
             }
         }
-    }
+    };
 
     const { isPending, data: productDetails } = useQuery({
         queryKey: ['product-details', idProduct],
         queryFn: fetchGetDetailsProduct,
         enabled: !!idProduct
     });
-    // const handleAddOrderProduct = () => {
-    //     if (!user?.id) {
-    //         navigate('/sign-in', { state: location?.pathname })
-    //     } else {
-    //         const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id)
-    //         if ((orderRedux?.amount + numProduct) <= orderRedux?.countInStock || (!orderRedux && productDetails?.countInStock > 0)) {
-    //             dispatch(addOrderProduct({
-    //                 orderItem: {
-    //                     name: productDetails?.name,
-    //                     amount: numProduct,
-    //                     image: productDetails?.image,
-    //                     price: productDetails?.price,
-    //                     product: productDetails?._id,
-    //                     discount: productDetails?.discount,
-    //                     countInStock: productDetails?.countInStock,
-    //                     selled: productDetails?.selled
 
-    //                 }
-    //             }))
-    //         } else {
-    //             setErrorLimitOrder(true)
-    //         }
-    //     }
-    // }
     const handleAddToCart = () => {
         setShowNotification(true);
         setTimeout(() => {
             setShowNotification(false);
         }, 3000);
     };
+
+
     const handleAddOrderProduct = () => {
         if (!user?.id) {
             navigate('/sign-in', { state: location?.pathname });
         } else {
             const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id);
-            if ((orderRedux?.amount + numProduct) <= orderRedux?.countInStock || (!orderRedux && productDetails?.countInStock > 0)) {
+            const totalAmount = (orderRedux?.amount || 0) + numProduct;
+
+            if (totalAmount > 5) {
+                message.error('Sản phẩm chỉ mua tối đa số lượng 5, giỏ hàng của bạn đang có 5');
+                return;
+            }
+
+            if (totalAmount <= productDetails?.countInStock) {
                 dispatch(addOrderProduct({
                     orderItem: {
                         name: productDetails?.name,
@@ -135,7 +152,6 @@ const ProductDetailsComponent = ({ idProduct }) => {
             }
         }
     };
-
 
     const triggerAnimation = () => {
         if (!imageRef.current || !cartIconRef?.current) return;
@@ -164,10 +180,6 @@ const ProductDetailsComponent = ({ idProduct }) => {
             imgClone.remove();
         }, 900);
     };
-
-
-
-
 
     return (
         <Loading isPending={isPending}>
@@ -203,30 +215,60 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                 <MinusOutlined style={{ color: '#000', fontSize: '20px' }} />
                             </button>
                             <WrapperInputNumber onChange={onChange} defaultValue={1} max={productDetails?.countInStock} min={1} value={numProduct} size="small" />
-                            <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase', numProduct === productDetails?.countInStock)}>
+                            {/* <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase', numProduct === productDetails?.countInStock)}>
+                                <PlusOutlined style={{ color: '#000', fontSize: '20px' }} />
+                            </button> */}
+
+                            <button
+                                style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}
+                                onClick={() => handleChangeCount('increase')}
+                            >
                                 <PlusOutlined style={{ color: '#000', fontSize: '20px' }} />
                             </button>
+
+                            {showMaxQuantityWarning && (
+                                <div style={{
+                                    position: 'fixed',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    background: '#fff',
+                                    padding: '16px',
+                                    borderRadius: '8px',
+                                    boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+                                    zIndex: 1000,
+                                    width: '320px',
+                                    textAlign: 'center'
+                                }}>
+                                    <p style={{ fontSize: '16px', fontWeight: '500', lineHeight: '1.5' }}>
+                                        sản phẩm chỉ mua tối đa <strong>số lượng 5</strong>,
+                                        giỏ hàng của bạn đang có <strong>{numProduct}</strong>
+                                    </p>
+
+                                    <button
+                                        onClick={() => setShowMaxQuantityWarning(false)}
+                                        style={{
+                                            display: 'block',
+                                            width: '100%',
+                                            padding: '10px 0',
+                                            background: '#007bff',
+                                            color: '#fff',
+                                            border: 'none',
+                                            borderRadius: '6px',
+                                            fontSize: '16px',
+                                            fontWeight: 'bold',
+                                            cursor: 'pointer',
+                                            marginTop: '12px'
+                                        }}
+                                    >
+                                        Đã hiểu
+                                    </button>
+                                </div>
+                            )}
+
+
                         </WrapperQualityProduct>
                     </div>
-                    {/* <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <div>
-                            <ButtonComponent
-                                size={40}
-                                styleButton={{
-                                    background: '#2d83d8',
-                                    height: '50px',
-                                    width: '400px',
-                                    border: 'none',
-                                    borderRadius: '4px'
-                                }}
-                                onClick={handleAddOrderProduct}
-                                textbutton={'Thêm sản phẩm vào giỏ hàng'}
-                                styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
-                            ></ButtonComponent>
-                            {errorLimitOrder && <div style={{ color: '#E30019' }}>Sản phẩm hết hàng</div>}
-                        </div> */}
-                    {/* </div> */}
-
 
                     <div>
                         <ButtonComponent
