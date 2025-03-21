@@ -202,24 +202,29 @@ const DetailsOrderPage = () => {
       render: (text, record) => (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img src={record.image} alt={text} style={{ width: 50, height: 50, marginRight: 10 }} />
-          <span>{text}</span>
+          <div style={{ width: 300, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {text}
+          </div>
         </div>
       ),
     },
     {
       title: 'Giá',
       dataIndex: 'price',
+      align: 'center',
       key: 'price',
       render: (price) => <Text strong>{convertPrice(price)}</Text>,
     },
     {
       title: 'Số lượng',
       dataIndex: 'amount',
+      align: 'center',
       key: 'amount',
     },
     {
       title: 'Giảm giá',
       dataIndex: 'discount',
+      align: 'center',
       key: 'discount',
       render: (discount, record) => (
         <Text strong>
@@ -266,16 +271,16 @@ const DetailsOrderPage = () => {
         <Card title="Danh sách sản phẩm" style={{ marginTop: '20px' }}>
           <Table dataSource={data?.orderItems} columns={columns} pagination={false} rowKey="id" />
 
-          <div style={{ marginTop: '20px', display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '10px', width: '1000px', textAlign: 'right' }}>
-            <Text strong style={{ textAlign: 'left', paddingLeft: '700px' }}>Tạm tính:</Text>
+          <div style={{ marginTop: '20px', display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '10px', width: '1100px', textAlign: 'right' }}>
+            <Text strong style={{ textAlign: 'left', paddingLeft: '800px' }}>Tạm tính:</Text>
             <Text type="danger" strong>{convertPrice(totalPrice).split(' ')[0]}</Text>
             <Text type="danger" strong>{convertPrice(totalPrice).split(' ')[1]}</Text>
 
-            <Text strong style={{ textAlign: 'left', paddingLeft: '700px' }}>Phí vận chuyển:</Text>
+            <Text strong style={{ textAlign: 'left', paddingLeft: '800px' }}>Phí vận chuyển:</Text>
             <Text type="danger" strong>{convertPrice(data?.shippingPrice).split(' ')[0]}</Text>
             <Text type="danger" strong>{convertPrice(data?.shippingPrice).split(' ')[1]}</Text>
 
-            <Text strong style={{ textAlign: 'left', fontSize: '16px', paddingLeft: '700px' }}>Tổng cộng:</Text>
+            <Text strong style={{ textAlign: 'left', fontSize: '16px', paddingLeft: '800px' }}>Tổng cộng:</Text>
             <Text type="danger" strong style={{ fontSize: '16px' }}>{convertPrice(data?.totalPrice).split(' ')[0]}</Text>
             <Text type="danger" strong style={{ fontSize: '16px' }}>{convertPrice(data?.totalPrice).split(' ')[1]}</Text>
           </div>
@@ -286,3 +291,4 @@ const DetailsOrderPage = () => {
 };
 
 export default DetailsOrderPage;
+
