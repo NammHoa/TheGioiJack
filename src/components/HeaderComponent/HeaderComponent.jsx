@@ -17,7 +17,7 @@ import logo from '../../assets/images/logojack.png'
 import * as ProductService from '../../services/ProductService'
 import { useQuery } from '@tanstack/react-query';
 import { convertPrice } from '../../utils';
-
+import { clearCart } from '../../redux/slides/cartSlice';
 const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
@@ -34,12 +34,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
         navigate('/sign-in')
     }
 
-    // const handleLogout = async () => {
-    //     setPending(true)
-    //     await UserService.logoutUser()
-    //     dispatch(resetUser())
-    //     setPending(false)
-    // }
+
 
     const handleLogout = async () => {
         try {
@@ -55,6 +50,9 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
             setPending(false);
         }
     };
+
+
+
 
 
 

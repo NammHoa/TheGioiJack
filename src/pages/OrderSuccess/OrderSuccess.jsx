@@ -14,6 +14,7 @@ const OrderSucess = () => {
       <Loading isPending={false}>
         <div style={{ height: '100%', width: '1270px', margin: '0 auto' }}>
           <h3 style={{ fontSize: '20px', fontWeight: 600, textAlign: 'center' }}>Đặt hàng thành công</h3>
+
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <WrapperContainer>
               <WrapperInfo>
@@ -47,8 +48,14 @@ const OrderSucess = () => {
                     </WrapperItemOrder>
                   )
                 })}
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
+                  <div style={{ fontSize: '16px', fontWeight: '500' }}>
+                    Thời gian đặt hàng: <span style={{ color: '#007bff' }}>{state?.orderTime}</span>
+                  </div>
+
+
                   <span style={{ fontSize: '16px', color: 'red', }}>Tổng tiền: {convertPrice(state?.totalPriceMemo)}</span>
+
                 </div>
               </WrapperItemOrderInfo>
 

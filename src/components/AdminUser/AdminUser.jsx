@@ -59,7 +59,7 @@ const AdminUser = () => {
         },
     )
 
-    const handleDelteManyUsers = (ids) => {
+    const handleDeleteManyUsers = (ids) => {
         mutationDeletedMany.mutate({ ids: ids, token: user?.access_token }, {
             onSettled: () => {
                 queryClient.invalidateQueries(['users'])
@@ -335,7 +335,7 @@ const AdminUser = () => {
         <div>
             <WrapperHeader>Quản lý người dùng</WrapperHeader>
             <div style={{ marginTop: '20px' }}>
-                <TableComponent handleDelteMany={handleDelteManyUsers} columns={columns} isPending={isFetchingUser} data={dataTable} onRow={(record, rowIndex) => {
+                <TableComponent handleDeleteMany={handleDeleteManyUsers} columns={columns} isPending={isFetchingUser} data={dataTable} onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {
                             setRowSelected(record._id)
