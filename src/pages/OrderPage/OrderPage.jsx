@@ -1,4 +1,4 @@
-import { Checkbox, Form, Modal } from 'antd'
+import { Checkbox, Form, Modal, Popconfirm } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { CustomCheckbox, WrapperCountOrder, WrapperInfo, WrapperItemOrder, WrapperLeft, WrapperListOrder, WrapperRight, WrapperStyleHeader, WrapperStyleHeaderDilivery, WrapperTotal } from './style';
 import { DeleteOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons'
@@ -24,6 +24,8 @@ const OrderPage = () => {
     const order = useSelector((state) => state.order)
     const user = useSelector((state) => state.user)
     const [numProduct, setNumProduct] = useState(1)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const [listChecked, setListChecked] = useState([])
     const [isOpenModalUpdateInfo, setIsOpenModalUpdateInfo] = useState(false)
@@ -46,22 +48,21 @@ const OrderPage = () => {
         }
     };
 
-
-    const handleChangeCount = (type, idProduct, limited) => {
-        if (type === 'increase') {
-            if (!limited) {
-                dispatch(increaseAmount({ idProduct }))
-            }
-        } else {
-            if (!limited) {
-                dispatch(decreaseAmount({ idProduct }))
-            }
+    const handleChangeCount = (type, idProduct, currentAmount, countInStock) => {
+        if (type === "increase" && currentAmount < 5 && currentAmount < countInStock) {
+            dispatch(increaseAmount({ idProduct }));
         }
-    }
+        if (type === "decrease" && currentAmount > 1) {
+            dispatch(decreaseAmount({ idProduct }));
+        }
+    };
+
+
 
 
 
     const handleDeleteOrder = (idProduct) => {
+        setIsModalOpen(false);
         Modal.confirm({
             title: 'Xác nhận xóa sản phẩm',
             content: 'Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?',
@@ -215,7 +216,10 @@ const OrderPage = () => {
         })
     }
 
-
+    const showDeleteConfirm = (product) => {
+        setSelectedProduct(product);
+        setIsModalOpen(true);
+    };
     const itemsDelivery = [
         {
             title: '20.000 VND',
@@ -291,13 +295,49 @@ const OrderPage = () => {
                                                 <span style={{ fontSize: '13px', color: '#242424' }}>{convertPrice(order?.price)}</span>
                                             </span>
                                             <WrapperCountOrder>
-                                                <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease', order?.product, order?.amount === 1)}>
-                                                    <MinusOutlined style={{ color: '#000', fontSize: '10px' }} />
+
+                                                <button
+                                                    style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}
+                                                >
+                                                    {order?.amount > 1 ? (
+                                                        <MinusOutlined
+                                                            style={{ color: '#000', fontSize: '10px' }}
+                                                            onClick={() => handleChangeCount('decrease', order?.product, order?.amount)}
+                                                        />
+                                                    ) : (
+                                                        <MinusOutlined
+                                                            style={{ color: '#000', fontSize: '10px', cursor: 'pointer' }}
+                                                            onClick={() => showDeleteConfirm(order?.product)}
+                                                        />
+                                                    )}
                                                 </button>
-                                                <WrapperInputNumber defaultValue={order?.amount} value={order?.amount} size="small" min={1} max={order?.countInstock} />
-                                                <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase', order?.product, order?.amount === order.countInstock, order?.amount === 1)}>
+                                                <WrapperInputNumber value={order?.amount} size="small" min={1} max={5} />
+
+                                                <button
+                                                    style={{
+                                                        border: 'none',
+                                                        background: 'transparent',
+                                                        cursor: order?.amount >= 5 || order?.amount >= order?.countInStock ? 'not-allowed' : 'pointer',
+                                                        opacity: order?.amount >= 5 || order?.amount >= order?.countInStock ? 0.5 : 1,
+                                                    }}
+                                                    onClick={() => handleChangeCount('increase', order?.product, order?.amount, order?.countInStock)}
+                                                    disabled={order?.amount >= 5 || order?.amount >= order?.countInStock}
+                                                >
                                                     <PlusOutlined style={{ color: '#000', fontSize: '10px' }} />
                                                 </button>
+
+                                                <Modal
+                                                    title="Xác nhận xóa sản phẩm"
+                                                    open={isModalOpen}
+                                                    onOk={() => handleDeleteOrder(selectedProduct)}
+                                                    onCancel={() => setIsModalOpen(false)}
+                                                    okText="Xóa"
+                                                    cancelText="Hủy"
+                                                    width={400}
+                                                >
+                                                    <p>Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?</p>
+                                                </Modal>
+
                                             </WrapperCountOrder>
                                             <span style={{ color: '#E30019', fontSize: '13px', fontWeight: 500 }}>{convertPrice(order?.price * order?.amount)}</span>
                                             <DeleteOutlined style={{ cursor: 'pointer', fontSize: '15px' }} onClick={() => handleDeleteOrder(order?.product)} />

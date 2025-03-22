@@ -51,6 +51,17 @@ export const getAllOrder = async (access_token) => {
   })
   return res.data
 }
+export const updateOrderStatus = async (orderId, status, access_token) => {
+  const res = await axios.patch(
+    `${process.env.REACT_APP_API_URL}/order/update-status/${orderId}`,
+    { status },
+    {
+      headers: { Authorization: `Bearer ${access_token}` },
+    }
+  );
+  return res.data;
+};
+ 
 
 
 

@@ -4,7 +4,7 @@ import { FacebookOutlined, InstagramOutlined, TikTokOutlined, TwitterOutlined } 
 
 const FooterComponent = () => {
     return (
-        <FooterWrapper>
+        <FooterWrapper >
             <div className="container" >
                 <div className="section">
                     <h3 className="section-title">GIỚI THIỆU THEGIOIJACK</h3>

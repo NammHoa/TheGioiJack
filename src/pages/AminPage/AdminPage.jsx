@@ -7,7 +7,7 @@ import AdminUser from '../../components/AdminUser/AdminUser';
 import AdminProduct from '../../components/AdminProduct/AdminProduct';
 import OrderAdmin from '../../components/OrderAdmin/OrderAmin';
 import PieChart from '../../components/OrderAdmin/PieChart';
-    import * as OrderService from '../../services/OrderService'
+import * as OrderService from '../../services/OrderService'
 import * as ProductService from '../../services/ProductService'
 import * as UserService from '../../services/UserService'
 
@@ -50,6 +50,7 @@ const AdminPage = () => {
             { queryKey: ['products'], queryFn: getAllProducts, staleTime: 1000 * 60 },
             { queryKey: ['users'], queryFn: getAllUsers, staleTime: 1000 * 60 },
             { queryKey: ['orders'], queryFn: getAllOrder, staleTime: 1000 * 60 },
+
         ]
     })
     const memoCount = useMemo(() => {
