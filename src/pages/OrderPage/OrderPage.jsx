@@ -307,7 +307,7 @@ const OrderPage = () => {
                                                     ) : (
                                                         <MinusOutlined
                                                             style={{ color: '#000', fontSize: '10px', cursor: 'pointer' }}
-                                                            onClick={() => showDeleteConfirm(order?.product)}
+                                                            onClick={() => handleDeleteOrder(order?.product)}
                                                         />
                                                     )}
                                                 </button>
@@ -326,17 +326,6 @@ const OrderPage = () => {
                                                     <PlusOutlined style={{ color: '#000', fontSize: '10px' }} />
                                                 </button>
 
-                                                <Modal
-                                                    title="Xác nhận xóa sản phẩm"
-                                                    open={isModalOpen}
-                                                    onOk={() => handleDeleteOrder(selectedProduct)}
-                                                    onCancel={() => setIsModalOpen(false)}
-                                                    okText="Xóa"
-                                                    cancelText="Hủy"
-                                                    width={400}
-                                                >
-                                                    <p>Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?</p>
-                                                </Modal>
 
                                             </WrapperCountOrder>
                                             <span style={{ color: '#E30019', fontSize: '13px', fontWeight: 500 }}>{convertPrice(order?.price * order?.amount)}</span>

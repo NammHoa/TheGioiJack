@@ -71,6 +71,8 @@ const ProductDetailsComponent = ({ idProduct }) => {
     }, [order.isSucessOrder])
 
 
+
+
     // const handleChangeCount = (type) => {
     //     if (type === 'increase') {
     //         if (numProduct < 5 && numProduct < productDetails?.countInStock) {

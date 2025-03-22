@@ -67,6 +67,7 @@ const HomePage = () => {
                     />
                 </AdBanner>
             )}
+
             <div style={{ width: '1270px', margin: '0 auto' }}>
                 <div style={{ position: 'fixed', top: 170, left: 0 }}>
                     <div className="fixed-banner left-banner" onClick={() => navigate('/PcSale')}>
