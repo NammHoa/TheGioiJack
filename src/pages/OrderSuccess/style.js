@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const WrapperContainer = styled.div`
   background: #f5f5fa;
   width: 100%;
-  height: 70vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +111,8 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end; 
   padding: 14px;
-`
+
+  `
 export const BackButton = styled.a`
   background: #ddd;
   padding: 10px 16px;
