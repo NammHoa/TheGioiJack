@@ -185,51 +185,51 @@ const ProductDetailsComponent = ({ idProduct }) => {
 
     return (
         <Loading isPending={isPending}>
-            <Row style={{ padding: 'auto', background: '#fff', borderRadius: '4px', height: 'auto' }}>
-                <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
-                    <Image src={productDetails?.image} alt="image prodcut" preview={true} />
-
+            <Row id="product-detail-container" style={{ padding: 'auto', background: '#fff', borderRadius: '4px', height: 'auto' }}>
+                <Col id="product-image-section" span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
+                    <Image id="product-image" src={productDetails?.image} alt="image product" preview={true} />
                 </Col>
-                <Col span={14} style={{ paddingLeft: '10px' }}>
-                    <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
-                    <div>
+
+                <Col id="product-info-section" span={14} style={{ paddingLeft: '10px' }}>
+                    <WrapperStyleNameProduct id="product-name">{productDetails?.name}</WrapperStyleNameProduct>
+                    <div id="product-rating">
                         <Rate allowHalf defaultValue={productDetails?.rating} value={productDetails?.rating} />
-                        <WrapperStyleTextSell> | Đã bán {productDetails?.selled || 0}</WrapperStyleTextSell>
+                        <WrapperStyleTextSell id="product-selled"> | Đã bán {productDetails?.selled || 0}</WrapperStyleTextSell>
                     </div>
-                    <WrapperPriceProduct>
-                        <WrapperPriceTextProduct>{convertPrice(productDetails?.price)} | <WrapperPriceTextDiscount> - {productDetails?.discount} %</WrapperPriceTextDiscount> </WrapperPriceTextProduct>
+
+                    <WrapperPriceProduct id="product-price">
+                        <WrapperPriceTextProduct>
+                            {convertPrice(productDetails?.price)} |
+                            <WrapperPriceTextDiscount id="product-discount"> - {productDetails?.discount} %</WrapperPriceTextDiscount>
+                        </WrapperPriceTextProduct>
                     </WrapperPriceProduct>
-                    <WrapperAddressProduct>
+
+                    <WrapperAddressProduct id="delivery-address">
                         <span>Giao đến </span>
-                        <span className='address'>{user?.address}</span> -
-                        <span className='change-address'>Đổi địa chỉ</span>
+                        <span id="user-address" className='address'>{user?.address}</span> -
+                        <span id="change-address" className='change-address'>Đổi địa chỉ</span>
                     </WrapperAddressProduct>
+
                     <LikeButtonComponent
-                        dataHref={process.env.REACT_APP_IS_LOCAL
-                            ? "https://developers.facebook.com/docs/plugins/"
-                            : window.location.href
-                        }
+                        id="like-button"
+                        dataHref={process.env.REACT_APP_IS_LOCAL ? "https://developers.facebook.com/docs/plugins/" : window.location.href}
                     />
-                    <div style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
-                        <div style={{ marginBottom: '10px' }}>Số lượng</div>
+
+                    <div id="product-quantity" style={{ margin: '10px 0 20px', padding: '10px 0', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5' }}>
+                        <div id="quantity-label" style={{ marginBottom: '10px' }}>Số lượng</div>
                         <WrapperQualityProduct>
-                            <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease', numProduct === 1)}>
+                            <button id="decrease-quantity" style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease', numProduct === 1)}>
                                 <MinusOutlined style={{ color: '#000', fontSize: '20px' }} />
                             </button>
-                            <WrapperInputNumber onChange={onChange} defaultValue={1} max={productDetails?.countInStock} min={1} value={numProduct} size="small" />
-                            {/* <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase', numProduct === productDetails?.countInStock)}>
-                                <PlusOutlined style={{ color: '#000', fontSize: '20px' }} />
-                            </button> */}
 
-                            <button
-                                style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}
-                                onClick={() => handleChangeCount('increase')}
-                            >
+                            <WrapperInputNumber id="quantity-input" onChange={onChange} defaultValue={1} max={productDetails?.countInStock} min={1} value={numProduct} size="small" />
+
+                            <button id="increase-quantity" style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase')}>
                                 <PlusOutlined style={{ color: '#000', fontSize: '20px' }} />
                             </button>
 
                             {showMaxQuantityWarning && (
-                                <div style={{
+                                <div id="max-quantity-warning" style={{
                                     position: 'fixed',
                                     top: '50%',
                                     left: '50%',
@@ -243,84 +243,65 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                     textAlign: 'center'
                                 }}>
                                     <p style={{ fontSize: '16px', fontWeight: '500', lineHeight: '1.5' }}>
-                                        sản phẩm chỉ mua tối đa <strong>số lượng 5</strong>,
-                                        giỏ hàng của bạn đang có <strong>{numProduct}</strong>
+                                        Sản phẩm chỉ mua tối đa <strong>số lượng 5</strong>, giỏ hàng của bạn đang có <strong>{numProduct}</strong>
                                     </p>
 
-                                    <button
-                                        onClick={() => setShowMaxQuantityWarning(false)}
-                                        style={{
-                                            display: 'block',
-                                            width: '100%',
-                                            padding: '10px 0',
-                                            background: '#007bff',
-                                            color: '#fff',
-                                            border: 'none',
-                                            borderRadius: '6px',
-                                            fontSize: '16px',
-                                            fontWeight: 'bold',
-                                            cursor: 'pointer',
-                                            marginTop: '12px'
-                                        }}
-                                    >
+                                    <button id="max-quantity-ok" onClick={() => setShowMaxQuantityWarning(false)} style={{
+                                        display: 'block',
+                                        width: '100%',
+                                        padding: '10px 0',
+                                        background: '#007bff',
+                                        color: '#fff',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        fontSize: '16px',
+                                        fontWeight: 'bold',
+                                        cursor: 'pointer',
+                                        marginTop: '12px'
+                                    }}>
                                         Đã hiểu
                                     </button>
                                 </div>
                             )}
-
-
                         </WrapperQualityProduct>
                     </div>
 
-                    <div>
-                        <ButtonComponent
-                            size={40}
-                            styleButton={{ background: '#2d83d8', height: '50px', width: '400px', border: 'none', borderRadius: '4px' }}
-                            onClick={handleAddOrderProduct}
-                            textbutton={'Thêm sản phẩm vào giỏ hàng'}
-                            styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
-                        />
+                    <ButtonComponent
+                        id="add-to-cart"
+                        size={40}
+                        styleButton={{ background: '#2d83d8', height: '50px', width: '400px', border: 'none', borderRadius: '4px' }}
+                        onClick={handleAddOrderProduct}
+                        textbutton={'Thêm sản phẩm vào giỏ hàng'}
+                        styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
+                    />
 
-                        <CartNotification className={showNotification ? "active" : ""}>
-                            ✅ Đã thêm vào giỏ hàng
-                            <br />
-                            <button style={{ borderRadius: '8px', width: '150px', alignItems: 'center', marginTop: '5px', border: '1px solid #bbddfd', color: '#2d83d8', backgroundColor: '#f1f8fe', cursor: 'pointer' }} onClick={() => window.location.href = "/order"}>Xem giỏ hàng</button>
-                        </CartNotification>
-                    </div>
-                    {errorLimitOrder && <div style={{ color: '#E30019' }}>Sản phẩm hết hàng</div>}
+                    <CartNotification id="cart-notification" className={showNotification ? "active" : ""}>
+                        ✅ Đã thêm vào giỏ hàng
+                        <br />
+                        <button id="view-cart" style={{ borderRadius: '8px', width: '150px', alignItems: 'center', marginTop: '5px', border: '1px solid #bbddfd', color: '#2d83d8', backgroundColor: '#f1f8fe', cursor: 'pointer' }} onClick={() => window.location.href = "/order"}>Xem giỏ hàng</button>
+                    </CartNotification>
 
-                    <div>
-                        <WrapperTextSell>
-                            ✔ Bảo hành chính hãng 24 tháng. <br /><br />
+                    {errorLimitOrder && <div id="out-of-stock" style={{ color: '#E30019' }}>Sản phẩm hết hàng</div>}
 
-                            ✔ Hỗ trợ đổi mới trong 7 ngày.<br /><br />
+                    <WrapperTextSell id="product-warranty-info">
+                        ✔ Bảo hành chính hãng 24 tháng.<br /><br />
+                        ✔ Hỗ trợ đổi mới trong 7 ngày.<br /><br />
+                        ✔ Windows bản quyền tích hợp.<br /><br />
+                        ✔ Miễn phí giao hàng toàn quốc.<br /><br />
+                    </WrapperTextSell>
 
-                            ✔ Windows bản quyền tích hợp.<br /><br />
-
-                            ✔ Miễn phí giao hàng toàn quốc.<br /><br />
-                        </WrapperTextSell>
-                    </div>
-                    <div style={{ border: '1px solid #ccc', borderRadius: '4px', padding: '16px', marginTop: '10px' }}>
+                    <div id="product-promotions" style={{ border: '1px solid #ccc', borderRadius: '4px', padding: '16px', marginTop: '10px' }}>
                         <h2 style={{ fontSize: '16px', fontWeight: '600' }}>Khuyến mãi:</h2>
                         <ul style={{ listStyleType: 'none', padding: 0, fontSize: '15px', fontWeight: '400' }}>
-                            <li style={{ marginBottom: '10px' }}> <CheckCircleOutlined style={{ color: 'green' }} /> Miễn phí vận chuyển cho đơn hàng trên 200.000 đ</li>
-                            <li style={{ marginBottom: '10px' }}> <CheckCircleOutlined style={{ color: 'green' }} /> Miễn phí cài đặt và vận chuyển</li>
-                            <li style={{ marginBottom: '10px' }}> <CheckCircleOutlined style={{ color: 'green' }} /> Giảm 10% cho đơn hàng đầu tiên</li>
+                            <li><CheckCircleOutlined style={{ color: 'green' }} /> Miễn phí vận chuyển cho đơn hàng trên 200.000 đ</li>
+                            <li><CheckCircleOutlined style={{ color: 'green' }} /> Miễn phí cài đặt và vận chuyển</li>
+                            <li><CheckCircleOutlined style={{ color: 'green' }} /> Giảm 10% cho đơn hàng đầu tiên</li>
                         </ul>
                     </div>
                 </Col>
-                <CommentComponent
-                    dataHref={process.env.REACT_APP_IS_LOCAL
-                        ? "https://developers.facebook.com/docs/plugins/comments#configurator"
-                        : window.location.href
-                    }
-                    width="1270"
-                    marginBottom='10px'
-                />
-                <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="" data-numposts="5"></div>
-
-            </Row >
+            </Row>
         </Loading>
+
     )
 }
 
