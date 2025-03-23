@@ -319,10 +319,10 @@ const AdminUser = () => {
     }
 
     return (
-        <div>
-            <WrapperHeader>Quản lý người dùng</WrapperHeader>
-            <div style={{ marginTop: '20px' }}>
-                <TableComponent handleDeleteMany={handleDeleteManyUsers} columns={columns} isPending={isFetchingUser} data={dataTable} onRow={(record, rowIndex) => {
+        <div id="user-management-container">
+            <WrapperHeader id="user-management-header">Quản lý người dùng</WrapperHeader>
+            <div id="user-table-container" style={{ marginTop: '20px' }}>
+                <TableComponent id="user-table" handleDeleteMany={handleDeleteManyUsers} columns={columns} isPending={isFetchingUser} data={dataTable} onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {
                             setRowSelected(record._id)
@@ -330,10 +330,11 @@ const AdminUser = () => {
                     };
                 }} />
             </div>
-            <DrawerComponent title='Chi tiết người dùng' isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="90%">
-                <Loading isPending={isPendingUpdate || isPendingUpdated}>
+            <DrawerComponent id="user-detail-drawer" title='Chi tiết người dùng' isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="90%">
+                <Loading id="user-detail-loading" isPending={isPendingUpdate || isPendingUpdated}>
 
                     <Form
+                        id="user-detail-form"
                         name="basic"
                         labelCol={{ span: 2 }}
                         wrapperCol={{ span: 22 }}
@@ -342,14 +343,16 @@ const AdminUser = () => {
                         form={form}
                     >
                         <Form.Item
+                            id="user-name-item"
                             label="Tên"
                             name="name"
                             rules={[{ required: true, message: 'Vui lòng nhập tên !' }]}
                         >
-                            <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
+                            <InputComponent id="user-name-input" value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
                         </Form.Item>
 
                         <Form.Item
+                            id="user-email-item"
                             label="Email"
                             name="email"
                             rules={[
@@ -362,34 +365,37 @@ const AdminUser = () => {
                                 },
                             ]}
                         >
-                            <InputComponent value={stateUserDetails['email']} onChange={handleOnchangeDetails} name="email" />
+                            <InputComponent id="user-email-input" value={stateUserDetails['email']} onChange={handleOnchangeDetails} name="email" />
                         </Form.Item>
 
                         <Form.Item
+                            id="user-phone-item"
                             label="Số điện thoại"
                             name="phone"
                             rules={[{ required: true, message: 'Vui lòng nhập số điện thoại !' }]}
                         >
-                            <InputComponent value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
+                            <InputComponent id="user-phone-input" value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
                         </Form.Item>
 
                         <Form.Item
+                            id="user-address-item"
                             label="Địa chỉ"
                             name="address"
                             rules={[{ required: true, message: 'Vui lòng nhập địa chỉ!' }]}
                         >
-                            <InputComponent value={stateUserDetails.address} onChange={handleOnchangeDetails} name="address" />
+                            <InputComponent id="user-address-input" value={stateUserDetails.address} onChange={handleOnchangeDetails} name="address" />
                         </Form.Item>
 
                         <Form.Item
+                            id="user-avatar-item"
                             label="Hình ảnh"
                             name="avatar"
                             rules={[{ required: true, message: 'Vui lòng thêm hình ảnh!' }]}
                         >
-                            <WrapperUploadFile onChange={handleOnchangeAvatarDetails} maxCount={1}>
-                                <Button >Chọn tệp</Button>
+                            <WrapperUploadFile id="user-avatar-upload" onChange={handleOnchangeAvatarDetails} maxCount={1}>
+                                <Button id="user-avatar-button">Chọn tệp</Button>
                                 {stateUserDetails?.avatar && (
-                                    <img src={stateUserDetails?.avatar} style={{
+                                    <img id="user-avatar-preview" src={stateUserDetails?.avatar} style={{
                                         height: '60px',
                                         width: '60px',
                                         borderRadius: '50%',
@@ -399,17 +405,17 @@ const AdminUser = () => {
                                 )}
                             </WrapperUploadFile>
                         </Form.Item>
-                        <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
-                            <Button type="primary" htmlType="submit">
+                        <Form.Item id="user-update-button-item" wrapperCol={{ offset: 20, span: 16 }}>
+                            <Button id="user-update-button" type="primary" htmlType="submit">
                                 Cập nhật
                             </Button>
                         </Form.Item>
                     </Form>
                 </Loading>
             </DrawerComponent>
-            <ModalComponent title="Xóa người dùng" open={isModalOpenDelete} onCancel={handleCancelDelete} onOk={handleDeleteUser}>
-                <Loading isPending={isPendingDeleted}>
-                    <div>Bạn có chắc xóa tài khoản này không?</div>
+            <ModalComponent id="user-delete-modal" title="Xóa người dùng" open={isModalOpenDelete} onCancel={handleCancelDelete} onOk={handleDeleteUser}>
+                <Loading id="user-delete-loading" isPending={isPendingDeleted}>
+                    <div id="user-delete-message">Bạn có chắc xóa tài khoản này không?</div>
                 </Loading>
             </ModalComponent>
         </div>
