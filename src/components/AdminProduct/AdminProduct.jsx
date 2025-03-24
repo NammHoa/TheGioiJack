@@ -624,13 +624,7 @@ const AdminProduct = () => {
                         >
                             <InputComponent value={stateProductDetails.manufacturer} onChange={handleOnchangeDetails} name="manufacturer" />
                         </Form.Item>
-                        {/* <Form.Item
-                            label="Loại"
-                            name="type"
-                            rules={[{ required: true, message: 'Vui lòng nhập Loại !' }]}
-                        >
-                            <InputComponent value={stateProductDetails['type']} onChange={handleOnchangeDetails} name="type" />
-                        </Form.Item> */}
+                        
                         <Form.Item
                             label="Loại"
                             name="type"
