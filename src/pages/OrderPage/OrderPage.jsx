@@ -301,6 +301,7 @@ const OrderPage = () => {
                                                 >
                                                     {order?.amount > 1 ? (
                                                         <MinusOutlined
+                                                            id='Minus-orderpage'
                                                             style={{ color: '#000', fontSize: '10px' }}
                                                             onClick={() => handleChangeCount('decrease', order?.product, order?.amount)}
                                                         />
@@ -323,7 +324,7 @@ const OrderPage = () => {
                                                     onClick={() => handleChangeCount('increase', order?.product, order?.amount, order?.countInStock)}
                                                     disabled={order?.amount >= 5 || order?.amount >= order?.countInStock}
                                                 >
-                                                    <PlusOutlined style={{ color: '#000', fontSize: '10px' }} />
+                                                    <PlusOutlined id='plus-max' style={{ color: '#000', fontSize: '10px' }} />
                                                 </button>
 
 
@@ -342,7 +343,7 @@ const OrderPage = () => {
                                 <div>
                                     <span>Địa chỉ: </span>
                                     <span style={{ fontWeight: 'bold' }}>{`${user?.address} ${user?.city} `} </span>
-                                    <span onClick={handleChangeAddress} style={{ color: '#E30019', cursor: 'pointer' }}>Thay đổi</span>
+                                    <span id='change-button' onClick={handleChangeAddress} style={{ color: '#E30019', cursor: 'pointer' }}>Thay đổi</span>
                                 </div>
                             </WrapperInfo>
                             <WrapperInfo>
@@ -368,8 +369,10 @@ const OrderPage = () => {
                             </WrapperTotal>
                         </div>
                         <ButtonComponent
+
                             onClick={() => handleAddCard()}
                             size={40}
+
                             styleButton={{
                                 background: '#2d83d8',
                                 height: '48px',
@@ -377,6 +380,7 @@ const OrderPage = () => {
                                 border: 'none',
                                 borderRadius: '4px'
                             }}
+
                             textbutton={'Mua hàng'}
                             styletextbutton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
@@ -394,6 +398,7 @@ const OrderPage = () => {
                         form={form}
                     >
                         <Form.Item
+                            id='name-orderPage'
                             label="Tên: "
                             name="name"
                             rules={[{ required: true, message: 'Vui lòng nhập tên !' }]}
@@ -408,6 +413,7 @@ const OrderPage = () => {
                             <InputComponent value={stateUserDetails['city']} onChange={handleOnchangeDetails} name="city" />
                         </Form.Item> */}
                         <Form.Item
+                            id='city-orderPage'
                             label="Thành phố: "
                             name="city"
                             rules={[{ required: true, message: "Vui lòng nhập thành phố !" }]}
@@ -428,6 +434,7 @@ const OrderPage = () => {
 
 
                         <Form.Item
+                            id='phone-orderPage'
                             label="Số điện thoại: "
                             name="phone"
                             rules={[
@@ -440,6 +447,7 @@ const OrderPage = () => {
                         </Form.Item>
 
                         <Form.Item
+                            id='address-orderPage'
                             label="Địa chỉ: "
                             name="address"
                             rules={[{ required: true, message: 'Vui lòng nhập địa chỉ !' }]}

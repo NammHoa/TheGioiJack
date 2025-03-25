@@ -219,7 +219,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         <div id="quantity-label" style={{ marginBottom: '10px' }}>Số lượng</div>
                         <WrapperQualityProduct>
                             <button id="decrease-quantity" style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease', numProduct === 1)}>
-                                <MinusOutlined style={{ color: '#000', fontSize: '20px' }} />
+                                <MinusOutlined id='button-minus' style={{ color: '#000', fontSize: '20px' }} />
                             </button>
 
                             <WrapperInputNumber id="quantity-input" onChange={onChange} defaultValue={1} max={productDetails?.countInStock} min={1} value={numProduct} size="small" />
