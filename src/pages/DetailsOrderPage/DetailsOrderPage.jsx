@@ -99,7 +99,7 @@ const DetailsOrderPage = () => {
           <Col span={8}>
             <Card title="Phương thức thanh toán">
               <Text>{data?.paymentMethod || 'Không rõ'}</Text>
-              <p style={{ color: data?.isPaid ? 'green' : 'red' }}>
+              <p style={{ color: data?.isPaid ? 'green' : 'red', fontWeight: 'bold' }}>
                 {data?.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán'}
               </p>
               <p>

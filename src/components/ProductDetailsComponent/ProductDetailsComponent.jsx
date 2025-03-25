@@ -242,7 +242,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                     width: '320px',
                                     textAlign: 'center'
                                 }}>
-                                    <p style={{ fontSize: '16px', fontWeight: '500', lineHeight: '1.5' }}>
+                                    <p id='announ-products' style={{ fontSize: '16px', fontWeight: '500', lineHeight: '1.5' }}>
                                         Sản phẩm chỉ mua tối đa <strong>số lượng 5</strong>, giỏ hàng của bạn đang có <strong>{numProduct}</strong>
                                     </p>
 
