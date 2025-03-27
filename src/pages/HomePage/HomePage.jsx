@@ -17,7 +17,7 @@ import { useDebounce } from '../../hooks/useDebounce'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import banner from '../../assets/images/banner2.webp'
-import TawkTo from '../../services/chat'
+// import TawkTo from '../../services/chat'
 
 
 const HomePage = () => {
@@ -123,7 +123,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
-            <TawkTo />
+            {/* <TawkTo /> */}
         </Loading>
     )
 }
