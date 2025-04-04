@@ -439,9 +439,10 @@ const OrderPage = () => {
                             name="phone"
                             rules={[
                                 { required: true, message: 'Vui lòng nhập số điện thoại !' },
-
-
-                            ]}
+                                {
+                                    pattern: /^[0-9]+$/,
+                                    message: "Vui lòng nhập số !"
+                                }]}
                         >
                             <InputComponent value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
                         </Form.Item>
