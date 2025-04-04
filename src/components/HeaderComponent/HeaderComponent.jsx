@@ -52,10 +52,6 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     };
 
 
-
-
-
-
     useEffect(() => {
         setPending(true)
         setUserName(user?.name)
@@ -188,7 +184,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                     {!isHiddenCart && (
                         <div onClick={() => navigate('/order')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Badge count={order?.orderItems?.length} size="small">
-                                <ShoppingCartOutlined style={{ fontSize: '30px' }} />
+                                <ShoppingCartOutlined id='ShoppingCart-icon' style={{ fontSize: '30px' }} />
                             </Badge>
                             <WrapperTextHeaderSmall >Giỏ hàng</WrapperTextHeaderSmall>
                         </div>

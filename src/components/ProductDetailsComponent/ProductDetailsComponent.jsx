@@ -243,7 +243,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                     textAlign: 'center'
                                 }}>
                                     <p id='announ-products' style={{ fontSize: '16px', fontWeight: '500', lineHeight: '1.5' }}>
-                                        Sản phẩm chỉ mua tối đa <strong>số lượng 5</strong>, giỏ hàng của bạn đang có <strong>{numProduct}</strong>
+                                        Sản phẩm chỉ mua tối đa <strong>số lượng 5</strong>
                                     </p>
 
                                     <button id="max-quantity-ok" onClick={() => setShowMaxQuantityWarning(false)} style={{
